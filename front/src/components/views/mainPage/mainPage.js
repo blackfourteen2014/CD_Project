@@ -4,7 +4,7 @@ export default class mainPage extends React.Component {
     render() {
         return (
             <div>
-                 <moment format = {'DD/MM/YYYY'} />
+                 메인임
             </div>
         )
     }
