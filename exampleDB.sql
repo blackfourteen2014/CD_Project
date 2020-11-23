@@ -60,14 +60,12 @@ create table Holiday(
 # 안됨
 
 
->>>>>>> updateMain/main
 INSERT INTO holiday (DATE,holimanage,holicontent) VALUES('2020-11-18','HC001','test');
 INSERT INTO holiday (DATE,holimanage,holicontent) VALUES('2020-11-19','HC002','test2');
 
 select * from holiday;
 
 SELECT holi.DATE,small.SmallInfo FROM holiday AS holi JOIN SmallCode AS small ON small.SmallCode = holi.holimanage;
-
 
 # 직원근무조회 연습용 create, insert, select, drop
 create table worklist(
@@ -80,7 +78,6 @@ insert into worklist(Date, day) values('2020-11-20', '화요일');
 select * from worklist;
 drop table worklist;
 
-
 #직원근무관리 테이블 임시
 create table employeeWork(
         Date VARCHAR(12) NOT NULL ,
@@ -89,8 +86,26 @@ create table employeeWork(
     );
     
 INSERT INTO employeeWork (DATE,Time,id) VALUES('2020-11-18','22:00','1111');
+INSERT INTO employeeWork (DATE,Time,id) VALUES('2020-11-19','22:00','1111');
+INSERT INTO employeeWork (DATE,Time,id) VALUES('2020-11-18','22:00','1112');
+INSERT INTO employeeWork (DATE,Time,id) VALUES('2020-11-18','22:00','1113');
 
 delete from employeeWork;
 
+select * from employeeWork where id='1117' and Date='2020-11-22';
+
 select * from employeeWork;
 
+select * from employeeWork;
+
+<<<<<<< HEAD
+=======
+alter table smallcode add SmallContent varchar(100);
+
+create table MasterCode(
+        LargeCode VARCHAR(3) NOT NULL,
+        LargeInfo varchar(45)
+    );
+
+INSERT INTO mastercode (LargeCode,LargeInfo) VALUES('HC','holidayCode');
+>>>>>>> updateMain/main

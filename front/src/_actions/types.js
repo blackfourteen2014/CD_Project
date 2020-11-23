@@ -7,5 +7,8 @@ export const ONWORK_USER = "onwork_user";
 =======
 export const SMALLCODE_INFO = "SmallCode_info";
 export const ONWORK_USER = "onwork_user";
+<<<<<<< HEAD
 
+>>>>>>> updateMain/main
+=======
 >>>>>>> updateMain/main

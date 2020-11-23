@@ -134,7 +134,7 @@ function Manage(props) {
               </div>
               <div style = {{background: '#fff', minHeight: 20,textAlign:'end'}} >
                 <Button type="primary" onClick={showModal}>추가</Button>
-                <ManageAdd Visible={Visible} handleCancel={handleCancel} handleOk={handleOk}></ManageAdd>
+                <ManageAdd Visible={Visible} handleCancel={handleCancel} handleOk={handleOk} />
                 <Button onClick={handleDelete}>삭제</Button>
                 <Button>수정</Button>
                 <Button onClick={handleSave}>확인(개발)</Button>
