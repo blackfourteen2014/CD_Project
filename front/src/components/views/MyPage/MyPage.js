@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import 'antd/dist/antd.css';
-<<<<<<< HEAD
 import {Layout, Menu, Button, Row, Col, Descriptions, Input, Modal} from 'antd';
 import { Link } from "react-router-dom";
 import LiveClock from '../MainPage/LiveClock';
-=======
 import { DatePicker, message, Alert, Layout, Menu, Breadcrumb, Button, Row, Col, Switch, Table, Select, Descriptions, Input, Modal} from 'antd';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import LiveClock from '../../../utils/LiveClock';
->>>>>>> updateMain/main
 import LoginedUser from '../../../utils/LoginedUser';
 import LogoutUser from '../../../utils/LogoutUser';
 

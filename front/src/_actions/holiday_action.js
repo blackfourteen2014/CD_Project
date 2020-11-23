@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
     HOLIDAY_INFO,
     SMALLCODE_INFO,
-
+    
 } from './types';
 
 export function holidayInfo(dataToSubmit){
