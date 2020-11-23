@@ -18,12 +18,12 @@ import Manage from './components/views/System/Manage';
 import Code from './components/views/System/Code';
 import Holiday from './components/views/System/Holiday';
 import Employee from './components/views/Employee/Employee';
-import MasterManage from './hoc/Master/MasterManage';
-import MasterOutwork from './hoc/Master/MasterOutwork';
-import MasterPage from './hoc/Master/MasterPage';
-import MasterMain from './hoc/Master/MasterMain';
-import MasterMiddle from './hoc/Master/MasterMiddle';
-import CheckMasterPage from './hoc/Master/CheckMasterPage';
+// import MasterManage from './hoc/Master/MasterManage';
+// import MasterOutwork from './hoc/Master/MasterOutwork';
+// import MasterPage from './hoc/Master/MasterPage';
+// import MasterMain from './hoc/Master/MasterMain';
+// import MasterMiddle from './hoc/Master/MasterMiddle';
+// import CheckMasterPage from './hoc/Master/CheckMasterPage';
 
 function App() {
   return (
@@ -42,12 +42,12 @@ function App() {
           <Route exact path="/code" component={Code} />
           <Route exact path="/holiday" component={Holiday} />
           <Route exact path="/employee" component={Employee} />
-          <Route exact path="/mastermanage" component={MasterManage} />
+          {/* <Route exact path="/mastermanage" component={MasterManage} />
           <Route exact path="/masteroutwork" component={MasterOutwork} />
           <Route exact path="/masterpage" component={MasterPage} />
           <Route exact path="/mastermain" component={MasterMain} />
           <Route exact path="/mastermiddle" component={MasterMiddle} />
-          <Route exact path="/ckmasterpage" component={CheckMasterPage} />
+          <Route exact path="/ckmasterpage" component={CheckMasterPage} /> */}
         </Switch>
       </div>
     </Router>//router(해당 페이지의 최적의 경로로 넘어갈 수 있게 해주는 기능) 설정

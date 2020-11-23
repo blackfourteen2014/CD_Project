@@ -1,14 +1,8 @@
 import React from "react";
 import 'antd/dist/antd.css';
-<<<<<<< HEAD
-import {Layout, Menu, Breadcrumb, PageHeader,Button, Row, Col} from 'antd';
-import { Link } from 'react-router-dom';
-import LiveClock from '../MainPage/LiveClock';
-=======
 import { DatePicker, message, Alert, Layout, Menu, Breadcrumb, PageHeader,Button, Row, Col, Switch, Table, Select, Descriptions, Input} from 'antd';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import LiveClock from '../../../utils/LiveClock';
->>>>>>> updateMain/main
 import LoginedUser from '../../../utils/LoginedUser';
 import LogoutUser from '../../../utils/LogoutUser';
 

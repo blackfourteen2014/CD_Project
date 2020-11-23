@@ -11,6 +11,10 @@ const { Header, Content, Sider, Footer } = Layout;
 
 function Code(props) {
 
+  const columns = CodeColumn;//CodeColumn테이블 
+  const [data, setData] = useState([]);//칼럼 안 데이터
+  const options = [{ value: 'CP' }, { value: 'SP' },{value: 'DP'}];
+  const [CheckTarget, setCheckTarget] = useState('');
   //선택 체크박스
   function onChange(e) {
     console.log('e.target.value : ',e.target.value);
