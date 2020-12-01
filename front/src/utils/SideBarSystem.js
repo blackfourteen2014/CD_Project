@@ -13,17 +13,21 @@ function SideBarSystem(props) {
                 <div>
                     <LiveClock></LiveClock>
                 </div>
-                <Menu theme="dark" defaultSelectedKeys={[props.DefaultKey]} mode="inline">
-                    <Menu.Item key="1" style = {{height: 100,padding: 30 }}>
-                        <span style = {{fontSize: 20}}>휴일 설정</span>
+                <Menu theme="dark" 
+                    defaultSelectedKeys={[props.DefaultKey]} 
+                    mode="inline" 
+                    style={{fontSize: 30, textAlignLast:'center'}}
+                >
+                    <Menu.Item key="1" style={{height:'90px',padding:'20px'}}>
+                        <span>휴일 설정</span>
                         <Link to="/holiday" />
                     </Menu.Item>
-                    <Menu.Item key="2" style = {{height: 100,padding: 30}}>
-                        <span style = {{fontSize: 20}}>직원 관리</span>
+                    <Menu.Item key="2" style={{height:'90px',padding:'20px'}}>
+                        <span>직원 관리</span>
                         <Link to="/manage" />
                     </Menu.Item>
-                    <Menu.Item key="3" style = {{height: 100,padding: 30}}>
-                        <span style = {{fontSize: 20}}>공통 코드</span>
+                    <Menu.Item key="3" style={{height:'90px',padding:'20px'}}>
+                        <span>공통 코드</span>
                         <Link to="/smallcode" />
                     </Menu.Item>           
                 </Menu>

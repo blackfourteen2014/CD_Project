@@ -16,7 +16,7 @@ useEffect(() => {
 }, []);
 return(
     <>
-        <Text style={{marginRight:'3em'}}>{userName} 님</Text>
+        <Text style={{marginRight:'3em', fontSize:'18px'}}>{userName} 님</Text>
     </>
 );
 }

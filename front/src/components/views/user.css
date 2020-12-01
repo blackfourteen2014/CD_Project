@@ -15,7 +15,7 @@
 /* MainWork Content 내부 전체 묶음 틀 가운데정렬, 너비조정 */
 #mainwrap{
     margin: 0 auto;
-    width: 1200px;
+    width: 100%;
 }
 /* MainWork 년, 월, 인쇄버튼 통합 부분 밑으로 조금 띄우기*/
 #mainheader{
@@ -253,3 +253,4 @@
     height: 150px;
     font-size: 18px;
 }
+/* ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ Sider.css ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ */

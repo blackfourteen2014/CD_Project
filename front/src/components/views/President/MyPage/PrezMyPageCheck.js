@@ -50,7 +50,8 @@ function PrezCheckMyPage(props) {
                 <Breadcrumb className = "mybreadcrumb">
                     <Breadcrumb.Item>
                         <PageHeader
-                            title="개인정보변경">   
+                            title="개인정보변경"
+                            subTitle="마이 페이지">   
                         </PageHeader>
                     </Breadcrumb.Item>
                 </Breadcrumb>

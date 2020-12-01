@@ -101,14 +101,20 @@ function Code() {
     <div>
       <Layout style={{ minHeight: '100vh' }}>
         <SideBarSystem DefaultKey={'3'}/>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0, textAlign: 'end' }} >
-          <Link  to="/">
-            <Button style={{marginRight:'1%'}}>로그아웃</Button>
+        <Layout style={{backgroundColor:'white'}}>
+          <div style={{textAlignLast:'end',background: '#fff',padding:0}}>
+            <Link  to="/">
+              <Button style={{marginRight:'1%',marginTop:'10px'}}>로그아웃</Button>   
             </Link>
-          </Header>
+          </div>
+          <PageHeader
+            className="site-page-header"
+            title="공통코드"
+            subTitle="공통코드 페이지"
+            style={{background: '#fff'}}
+          />
           <Content>
-          <Breadcrumb style = {{background: '#fff', minHeight: 100}}>
+          {/* <Breadcrumb style = {{background: '#fff', minHeight: 100}}>
               <Breadcrumb.Item>
                 <PageHeader
                   className="site-page-header"
@@ -116,7 +122,7 @@ function Code() {
                   subTitle="공통코드 페이지">   
                 </PageHeader>
               </Breadcrumb.Item>
-            </Breadcrumb>
+            </Breadcrumb> */}
             {/* 선택창 */}
             <div style = {{fontSize: 20,background: '#fff', minHeight: 2}}>
             <Tabs tabBarStyle={{backgroundColor:'white'}}defaultActiveKey="2">

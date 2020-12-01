@@ -15,14 +15,14 @@ router.get('/logout', (req, res) => {
 // router.post('/login', (req, res) => { //request부분에 front에서 넘어온 데이터가 저장됨
 router.post('/login', (req, res) => { //request부분에 front에서 넘어온 데이터가 저장됨
     // 시스템 관리자 페이지 구분,GRANT
-    if(req.body.email === 'root' && req.body.password === '1111'){
+    if(req.body.Id === 'root' && req.body.password === '1111'){
         return res.json({
         loginSuccess: true,
         message: "시스템 관리자",
         grant: 'system'
         });
     } else {
-        db.query(`select * from employee where email='${req.body.email}'`, (err,userInfo) => { //검색 부분 (수정해야함. 다른 기능도 만들고 수정)
+        db.query(`select * from employee where id='${req.body.Id}'`, (err,userInfo) => { //검색 부분 (수정해야함. 다른 기능도 만들고 수정)
           if(err) throw err;
           if(userInfo[0] === undefined){
             return res.json({
@@ -31,7 +31,7 @@ router.post('/login', (req, res) => { //request부분에 front에서 넘어온 �
               });
           } else {
             //console.log(userInfo[0].rank);
-              if(req.body.email === userInfo[0].email && 
+              if(req.body.Id === userInfo[0].id && 
                 req.body.password === userInfo[0].password && 
                 userInfo[0].rank === '대표')
                 {
@@ -44,7 +44,7 @@ router.post('/login', (req, res) => { //request부분에 front에서 넘어온 �
                   grant: 'president'
                   });
                 } 
-              else if(req.body.email === userInfo[0].email && req.body.password === userInfo[0].password)
+              else if(req.body.Id === userInfo[0].id && req.body.password === userInfo[0].password)
                 {
                   req.session.userId = userInfo[0].id;
                   //req.session.userName = userInfo[0].name;

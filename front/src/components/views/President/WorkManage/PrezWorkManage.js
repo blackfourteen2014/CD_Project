@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Table, Tabs } from 'antd';
+import { Layout, Table, Tabs, PageHeader } from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
 import axios from 'axios';
 import LoginedUser from '../../../../utils/LoginedUser';
@@ -56,10 +56,16 @@ function PrezWorkManage(props){
         <Layout>
           <SideBar DefaultKey={'4'}/>
           <Layout>
-            <Header>
+            <div style={{textAlignLast:'end',background: '#fff',padding: '10px' }}>
               <LoginedUser />
               <LogoutUser pageChange={props}/>
-            </Header>
+            </div>
+            <PageHeader
+              className="site-page-header"
+              title="업무지시 및 조회"
+              subTitle="업무지시 및 조회 페이지"
+              style={{backgroundColor:'#fff'}}
+            />
             <div className = "managecontent">
                 <Tabs defaultActiveKey="1" type={'card'} tabBarStyle={{backgroundColor:'white'}}>
                   <TabPane tab="업무조회" key="1">  

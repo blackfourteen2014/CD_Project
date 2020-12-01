@@ -50,25 +50,25 @@ function SideBarEmployee(props) {
             <LiveClock />
             </div>
             <Row>
-                <Col span={12}><Button block onClick={handleOnWork} className='btn'>출근</Button></Col>
-                <Col span={12}><Button block onClick={handleOffWork} className='btn'>퇴근</Button></Col>
+                <Col span={12}><Button block onClick={handleOnWork} className='sidebar_btn'>출근</Button></Col>
+                <Col span={12}><Button block onClick={handleOffWork} className='sidebar_btn'>퇴근</Button></Col>
             </Row>
             <OnWork OnVisible={OnVisible} Date={Date} Time={Time} handleOnOk={handleOnOk} />
             <OffWork OffVisible={OffVisible} Date={Date} Time={Time} handleOffOk={handleOffOk} />
-              <Menu theme="dark" defaultSelectedKeys={props.DefaultKey} mode="inline" className='menu'>
-                <Menu.Item key="1" >
+              <Menu theme="dark" defaultSelectedKeys={props.DefaultKey} mode="inline" id='sideBar_employee_menu'>
+                <Menu.Item key="1" style={{height:'50px',padding:'5px'}}>
                   <span>홈 바로가기</span>
                   <Link to="/main" />
                 </Menu.Item>
-                <Menu.Item key="2" >
+                <Menu.Item key="2" style={{height:'50px',padding:'5px'}}>
                   <span>연가</span>
                   <Link to="/holidayuser" />
                 </Menu.Item>
-                <Menu.Item key="3" >
+                <Menu.Item key="3" style={{height:'50px',padding:'5px'}}>
                   <span>업무지시 및 조회</span>
                   <Link to="/workmanage" />
                 </Menu.Item>
-                <Menu.Item key="4" >
+                <Menu.Item key="4" style={{height:'50px',padding:'5px'}}>
                   <span>마이 페이지</span>
                   <Link to="/mypage" />
                 </Menu.Item>

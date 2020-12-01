@@ -6,6 +6,7 @@ import LiveClock from './LiveClock'; //시계
 import OnWork from './OnWork'; //출근 기능
 import OffWork from './OffWork'; //퇴근 기능
 import { Link } from "react-router-dom"; //라우터
+import './SideBar.css';
 
 const { Sider } = Layout;
 
@@ -49,29 +50,29 @@ function SideBarPresident(props) {
             <LiveClock />
             </div>
             <Row>
-                <Col span={12}><Button block onClick={handleOnWork}>출근</Button></Col>
-                <Col span={12}><Button block onClick={handleOffWork}>퇴근</Button></Col>
+                <Col span={12}><Button block onClick={handleOnWork} className='sidebar_btn'>출근</Button></Col>
+                <Col span={12}><Button block onClick={handleOffWork} className='sidebar_btn'>퇴근</Button></Col>
             </Row>
             <OnWork OnVisible={OnVisible} Date={Date} Time={Time} handleOnOk={handleOnOk} />
             <OffWork OffVisible={OffVisible} Date={Date} Time={Time} handleOffOk={handleOffOk} />
-              <Menu theme="dark" defaultSelectedKeys={props.DefaultKey} mode="inline">
-                <Menu.Item key="1" >
+              <Menu theme="dark" defaultSelectedKeys={props.DefaultKey} mode="inline" id='sideBar_employee_menu'>
+                <Menu.Item key="1" style={{height:'50px',padding:'5px'}}>
                   <span>홈 바로가기</span>
                   <Link to="/prezmain" />
                 </Menu.Item>
-                <Menu.Item key="2" >
+                <Menu.Item key="2" style={{height:'50px',padding:'5px'}}>
                   <span>연가</span>
                   <Link to="/prezholi" />
                 </Menu.Item>
-                <Menu.Item key="3" >
+                <Menu.Item key="3" style={{height:'50px',padding:'5px'}}>
                   <span>직원근무조회</span>
                   <Link to="/employeemanage" />
                 </Menu.Item>
-                <Menu.Item key="4" >
+                <Menu.Item key="4" style={{height:'50px',padding:'5px'}}>
                   <span>업무지시 및 조회</span>
                   <Link to="/prezworkmanage" />
                 </Menu.Item>
-                <Menu.Item key="5" >
+                <Menu.Item key="5" style={{height:'50px',padding:'5px'}}>
                   <span>마이 페이지</span>
                   <Link to="/prezmypage" />
                 </Menu.Item>
