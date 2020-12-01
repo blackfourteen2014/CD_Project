@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Button, Table} from 'antd';
+import { Layout, Button, Table, PageHeader } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 import LoginedUser from '../../../../utils/LoginedUser';
@@ -115,10 +115,16 @@ function PrezHoli(props){
         <Layout>
           <SideBar DefaultKey={'2'}/>
           <Layout>
-            <Header>
+            <div style={{textAlignLast:'end',background: '#fff',padding: '10px' }}>
               <LoginedUser />
               <LogoutUser pageChange={props}/>
-            </Header>
+            </div>
+            <PageHeader
+              className="site-page-header"
+              title="연가"
+              subTitle="연가신청 페이지"
+              style={{backgroundColor:'#fff'}}
+            />
             <Content>
               {/* 캘린더 */}
               <Calendar

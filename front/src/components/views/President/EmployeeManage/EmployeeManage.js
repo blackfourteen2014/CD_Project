@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { Layout, Button, Table, Select, DatePicker } from 'antd';
+import { Layout, Button, Table, Select, DatePicker, PageHeader } from 'antd';
 import 'antd/dist/antd.css';
 import SideBar from '../../../../utils/SideBarPresident';
 import LoginedUser from '../../../../utils/LoginedUser';
@@ -18,12 +18,13 @@ function EmployeeManage(props){
         console.log(`selected ${value}`);
     }
      //근무부서 선택
-const [data, setData] = useState([]);//칼럼 안 데이터
+//const [data, setData] = useState([]);//칼럼 안 데이터
 const [DeptList, setDeptList] = useState(['']); //부서검색
-function onChange(value) {
-  if(value == 'All'){
+function onSelectChange(value) {
+  console.log(value);
+  if(value === 'All'){
     axios.post('/api/employeemanageuserlist',SaveDate).then(response => {   
-      setData(response.data);
+      setUserList(response.data);
     });
     console.log(value);
   }else{
@@ -34,7 +35,7 @@ function onChange(value) {
     }
     axios.post('/api/employeeworkdeptcodelist',body).then(response => {  
       console.log(response.data);
-      setData(response.data);
+      setUserList(response.data);
     });
   }
 }
@@ -96,10 +97,16 @@ function onChange(value) {
         <Layout style={{ minHeight: '100vh' }}>
           <SideBar DefaultKey={'3'}/>
           <Layout>
-            <Header style={{ background: '#fff', padding: 0, textAlign: 'end' }} >
+            <div style={{textAlignLast:'end',background: '#fff',padding: '10px' }}>
               <LoginedUser />
               <LogoutUser pageChange={props}/>
-            </Header>
+            </div>
+            <PageHeader
+              className="site-page-header"
+              title="직원근무조회"
+              subTitle="직원근무조회 페이지"
+              style={{backgroundColor:'#fff'}}
+            />
             <Content style={{ margin: '0 auto', width: '100%'}}>
               <div>
                   <div>
@@ -108,7 +115,7 @@ function onChange(value) {
                       </div>
                       <div style = {{display: "inline-block"}}>
                         <Select showSearch style={{ width: 200 }} placeholder="근무부서 검색"
-                        onChange={onChange}
+                        onChange={onSelectChange}
                         >
                           <Option key={'All'}>All</Option>
                           {DeptList.map(code => (
@@ -125,7 +132,7 @@ function onChange(value) {
                       </div>
                   </div>
                   <div>
-                      <Table columns={EmployeeManageColum} dataSource={UserList,data} pagination={false}
+                      <Table columns={EmployeeManageColum} dataSource={UserList} pagination={false}
                         onRow={(record) => ({onClick: () => { handleWorkInformation(record) }})}/>
                       {Visible ? 
                       <EmployeeManageInfo 

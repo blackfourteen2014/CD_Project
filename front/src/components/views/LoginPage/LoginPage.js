@@ -11,11 +11,11 @@ import 'antd/dist/antd.css';
 function LoginPage(props) {
     const dispatch = useDispatch(); //redux
     //state 초기화
-    const [Email, setEmail] = useState("")
+    const [Id, setId] = useState("")
     const [Password, setPassword] = useState("")
     //state 설정
-    const onEmailHandler = (event) => {
-        setEmail(event.currentTarget.value);
+    const onIdHandler = (event) => {
+        setId(event.currentTarget.value);
     }
 
     const onPasswordHandler = (event) => {
@@ -28,7 +28,7 @@ function LoginPage(props) {
         //console.log('passwd',Password); //비번
         //console.log('submit'); //버튼을 눌렀을 때
         let body = {
-            email: Email,
+            Id,
             password: Password
         }
         //.than는 앞의 함수가 다 처리될 때까지 기다린 뒤에 than안에 있는 명령어를 실행한다.
@@ -70,10 +70,10 @@ function LoginPage(props) {
                 onFinish={onSubmitHandler}
                 style = {{display: 'flex', flexDirection: 'column'}}
                 >
-                <Form.Item label="Email" name="Email">
-                    <Input value={Email} onChange={onEmailHandler} />
+                <Form.Item label="사원번호" name="Id">
+                    <Input value={Id} onChange={onIdHandler} />
                 </Form.Item>
-                <Form.Item label="Password" name="Password">
+                <Form.Item label="비밀번호" name="Password">
                     <Input.Password value={Password} onChange={onPasswordHandler} />
                 </Form.Item>
                 <Button htmlType="submit">Login </Button>

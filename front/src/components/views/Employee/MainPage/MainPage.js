@@ -1,5 +1,5 @@
 import React from 'react'; //리액트
-import { Layout } from 'antd'; //antd디자인
+import { Layout, PageHeader } from 'antd'; //antd디자인
 import 'antd/dist/antd.css'; //antd디자인 CSS
 import LoginedUser from '../../../../utils/LoginedUser'; ///utils 폴더
 import LogoutUser from '../../../../utils/LogoutUser';
@@ -15,10 +15,16 @@ function MainPage(props) {
       <Layout>
         <SideBar DefaultKey={'1'}/>
         <Layout>
-          <Header>
+          <div style={{textAlignLast:'end',background: '#fff',padding: '10px' }}>
             <LoginedUser />
             <LogoutUser pageChange={props}/>
-          </Header>
+          </div>
+          <PageHeader
+            className="site-page-header"
+            title="홈 바로가기"
+            subTitle="월 근무조회 페이지"
+            style={{backgroundColor:'#fff'}}
+          /> 
           <Content>
             <MainWork />
           </Content>

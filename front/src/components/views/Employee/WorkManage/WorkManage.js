@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import 'antd/dist/antd.css'; //antd디자인 CSS
 import axios from 'axios';
-import { Layout, Table, Tabs } from 'antd';
+import { Layout, Table, Tabs, PageHeader } from 'antd';
 import LoginedUser from '../../../../utils/LoginedUser';////utils
 import LogoutUser from '../../../../utils/LogoutUser';
 import SideBar from '../../../../utils/SideBarEmployee';///여기까지
@@ -45,10 +45,16 @@ const { TabPane } = Tabs;
           <Layout>
             <SideBar DefaultKey={'3'}/>
             <Layout>
-              <Header>
+              <div style={{textAlignLast:'end',background: '#fff',padding: '10px' }}>
                 <LoginedUser />
                 <LogoutUser pageChange={props}/>
-              </Header>
+              </div>
+              <PageHeader
+                className="site-page-header"
+                title="업무지시 및 조회"
+                subTitle="업무지시 및 조회 페이지"
+                style={{backgroundColor:'#fff'}}
+              />
               <div className = "managecontent">
                 <Tabs defaultActiveKey="1" type={'card'} tabBarStyle={{backgroundColor:'white'}}>
                   <TabPane tab="업무조회" key="1">  

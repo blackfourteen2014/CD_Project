@@ -120,48 +120,52 @@ function Holiday(props) {
       <Layout style={{ minHeight: '100vh' }}>
         <SideBarSystem DefaultKey={'1'}/>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0, textAlign: 'end' }} >
-          <Link  to="/">
-            <Button style={{marginRight:'1%'}}>로그아웃</Button>
+          {/* <Header > */}
+          <div style={{textAlignLast:'end',background: '#fff',padding:0}}>
+            <Link  to="/">
+              <Button style={{marginRight:'1%' ,marginTop:'10px'}}>로그아웃</Button>   
             </Link>
-          </Header>
-          <Content>
-          <Breadcrumb style = {{background: '#fff', minHeight: 10}}>
-              <Breadcrumb.Item>
-                <PageHeader
-                  className="site-page-header"
-                  title="휴일설정"
-                  subTitle="휴일설정 페이지">   
-                </PageHeader>
-              </Breadcrumb.Item>
-            </Breadcrumb> 
-            {/* 캘린더 */}
-            <Modal
-                  visible={Delvisible}
-                  centered
-                  onOk={DelhandleOk}
-                  onCancel={DelhandleCancel}
-                  width={250}
-                  >
-                    <p>삭제 하시겠습니까?</p>
-            </Modal>
-            <Calendar
-                  localizer={localizer}
-                  events={ListData}                
-                  onSelectEvent={showModal}
-                  startAccessor="start"
-                  endAccessor="end"
-                  style={{ height: 800,fontSize:'20px'}}
-                  views={{month: true}}
-                  selectable ={true}
-                  onSelectSlot = {handleDateSelect}
-                  components={{
-                    toolbar: CustomToolbar,
-                  }}
-                 />
-                
-            <HolidayAdd StartDate={StartDate} Visible={Visible} handleOk={handleOk} handleCancel={handleCancel} />
-            </Content>
+          </div>
+          <PageHeader
+            className="site-page-header"
+            title="휴일설정"
+            subTitle="휴일설정 페이지"
+            style={{background: '#fff'}}
+          /> 
+            {/* </Header> */}
+            <Content>
+            {/* <Breadcrumb style = {{background: '#fff', minHeight: 10}}>
+                <Breadcrumb.Item>
+                  
+                </Breadcrumb.Item>
+              </Breadcrumb>  */}
+              {/* 캘린더 */}
+              <Modal
+                    visible={Delvisible}
+                    centered
+                    onOk={DelhandleOk}
+                    onCancel={DelhandleCancel}
+                    width={250}
+                    >
+                      <p>삭제 하시겠습니까?</p>
+              </Modal>
+              <Calendar
+                    localizer={localizer}
+                    events={ListData}                
+                    onSelectEvent={showModal}
+                    startAccessor="start"
+                    endAccessor="end"
+                    style={{ height: 800,fontSize:'20px'}}
+                    views={{month: true}}
+                    selectable ={true}
+                    onSelectSlot = {handleDateSelect}
+                    components={{
+                      toolbar: CustomToolbar,
+                    }}
+                  />
+                  
+              <HolidayAdd StartDate={StartDate} Visible={Visible} handleOk={handleOk} handleCancel={handleCancel} />
+              </Content>
       </Layout>
     </Layout>
     </div>

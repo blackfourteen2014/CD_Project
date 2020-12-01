@@ -10,7 +10,7 @@ const { TextArea } = Input;
 
 function WorkManageSend() {
     const [CheckTarget, setCheckTarget] = useState(['']); //선택한 유저 값
-    const [data, setData] = useState([]);//직원들 부서검색
+    //const [data, setData] = useState([]);//직원들 부서검색
     const [DeptList, setDeptList] = useState(['']); //부서검색
     //선택 박스
     const rowSelection = {
@@ -20,17 +20,18 @@ function WorkManageSend() {
         }
     };
     //업무지시 부서선택
-    function onChange(value) {
+    function onSelectChange(value) {
         if(value == 'All'){
-          axios.get('/api//users/read').then(response => {  
-            setData(response.data);
+          axios.get('/api/workmanageuserlist').then(response => {  
+            setUserList(response.data);
           });
         }else{
           let body = {
             SmallInfo : value
           }
+          //시스템 관리자에 있는 덱 코드 리스트 가져다 쓴 것(수정해야함)
           axios.post('/api/deptCodelist',body).then(response => {  
-            setData(response.data);
+            setUserList(response.data);
           });
         }
       }
@@ -92,13 +93,13 @@ function WorkManageSend() {
         setDes(e.currentTarget.value);
     }
     // 직원 리스트 출력
-    const [UserList, setUserList] = useState(['']); //직원 리스트
+    const [UserList, setUserList] = useState([]); //직원 리스트
     //데이터 GET
     useEffect(() => {
-        axios.get('/api/workmanageuserlist').then(response => {
-            //console.log(response.data);
-            setUserList(response.data);
-        });
+        // axios.get('/api/workmanageuserlist').then(response => {
+        //     //console.log(response.data);
+        //     setUserList(response.data);
+        // });
         axios.get('/api/deptlist').then(response => {
             setDeptList(response.data);
           });
@@ -112,7 +113,7 @@ function WorkManageSend() {
                 </div>
                 <div className = "deptbox">
                     <Select className = "selectdept" showSearch placeholder="근무부서 검색"
-                            onChange={onChange}>
+                            onChange={onSelectChange}>
                         <Option key={'All'}>All</Option>
                         {DeptList.map(code => (
                         <Option key={code.SmallInfo}>{code.SmallInfo}</Option>
