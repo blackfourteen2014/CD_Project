@@ -573,7 +573,7 @@ app.get('/api/workmanageread',(req,res)=>{
   let sendData = [];
   let data = {};
   let i = 0;
-  db.query('SELECT * from WorkManage Join employee ON employee.id = WorkManage.sendId where WorkManage.getId = ?',[req.session.userId],(error,reads)=>{
+  db.query('SELECT * from WorkManage Join employee ON employee.id = WorkManage.sendId where WorkManage.getId = ? ORDER BY startDate DESC',[req.session.userId],(error,reads)=>{
     if (error) throw error;
     //console.log(reads);
     reads.forEach(read => {

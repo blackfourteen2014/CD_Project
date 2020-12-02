@@ -140,6 +140,7 @@ set sql_safe_updates=0;
 	delete from holiday;
 # 업무조회
 	delete from WorkManage;
+    delete from WorkManage ;
 #=================================================================================
 
 # 데이터 수정========================================================================
@@ -243,3 +244,29 @@ set sql_safe_updates=0;
 	INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/26','10:00','18:00','1111');
 	INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/27','10:00','18:00','1111');
 	INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/30','10:00','18:00','1111');
+    
+	INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/1','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/2','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/3','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/4','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/5','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/6','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/9','10:00','18:00','1112');
+	INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/10','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/11','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/12','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/13','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/16','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/17','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/18','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/19','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/20','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/23','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/24','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/25','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/26','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/27','10:00','18:00','1112');
+    INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/11/30','10:00','18:00','1112');
+    
+    SELECT * from WorkManage Join employee ON employee.id = WorkManage.sendId where WorkManage.getId = '1112' ORDER BY startDate DESC;
+    

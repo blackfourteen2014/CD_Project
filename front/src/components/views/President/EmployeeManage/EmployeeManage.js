@@ -9,7 +9,7 @@ import {EmployeeManageColum} from './EmployeeManageColums';
 import moment from 'moment';
 import axios from 'axios';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const { Option } = Select;
 
 function EmployeeManage(props){
@@ -70,6 +70,7 @@ function onSelectChange(value) {
     const [Visible, setVisible] = useState(false); //팝업 창 변수
     const [UserData, setUserData] = useState(''); //받아온 유저 데이터 변수
     const [WorkTimeSum, setWorkTimeSum] = useState(0); //총 근무시간 데이터 변수
+    const [User, setUser] = useState(['']);
     //직원 월별 근무 조회 GET
     const handleWorkInformation = (value) => {
       //보낼 데이터
@@ -81,6 +82,7 @@ function onSelectChange(value) {
         setUserData(response.data.userList); //받아온 유저 데이터
         setWorkTimeSum(response.data.userWorkTimeSum); //총 근무시간 데이터
     });
+      setUser(value);
       setVisible(true);
     }
     //팝업 OFF
@@ -143,6 +145,7 @@ function onSelectChange(value) {
                         WorkTimeSum={WorkTimeSum} 
                         SelectYear={SelectYear}
                         SelectMonth={SelectMonth}
+                        User={User}
                         />:null}
                       
                   </div>
