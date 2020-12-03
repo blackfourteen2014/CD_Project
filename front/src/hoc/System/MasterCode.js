@@ -25,7 +25,7 @@ function MasterCode(props) {
 //   }
   //delete
   const handleDelete = () => {
-    axios.post('/api/MasterCodedelete', CheckTarget).then(res =>{
+    axios.post('/api/mastercodedelete', CheckTarget).then(res =>{
      if(res.data.success){
      alert('삭제되었습니다.');
      window.location.reload();

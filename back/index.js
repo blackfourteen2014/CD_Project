@@ -22,32 +22,12 @@ app.use(session({
     store:new mysqlStore(sessionDB)
   }));
 
-//nodejs 연습 및 axios 연습 (삭제예정)======================================================
-//get 가져오는 것. '/'는 주소를 뜻한다. 현재 '/'에 아무것도 안붙으므로 root directory를 뜻한다.
-//req => request(요청), res=> response(응답)
-// app.get('/', (req, res) => { //삭제 예정
-//   res.send('Root => Hello World!/안녕하세요!!!')
-// })
-// //위와 마찬가지. 다만, /users에 연결되어 있다 --삭제 예정
-// app.get('/users', (req, res) => {
-//   db.query('SELECT * from Users', (error, rows) => {
-//     if (error) throw error;
-//     console.log('mysql Connected...');
-//     console.log('User info is: ', rows);
-//     res.send(rows);
-//   });
-// });
-// //axios 연습(해당 주소로 가면 볼 수 있음) --삭제 예정
-// app.get('/api/hello',(req,res)=>{
-//   res.send('안녕하세요~');
-// });
-//=========================================================================================
 //페이지의 복잡성을 해소하기 위한 라우터
 app.use('/api/users', LoginRouter);
 app.use('/api/users', CrudRouter);
 //SystemServer로 옮길 예정================================================================================================
 //대코드 테이블 삭제(주소는 다 소문자로 변경해주면 좋을 거 같음)
-app.post('/api/MasterCodedelete',(req,res)=>{
+app.post('/api/mastercodedelete',(req,res)=>{
   req.body.forEach(user => {
     //console.log(user.id);
     db.query(`DELETE FROM mastercode WHERE LargeCode = ?`,[user.LargeCode],function(error,result){
