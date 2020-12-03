@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Table, Layout,Modal} from 'antd';
+import { Button, Table, Layout, Modal, Typography } from 'antd';
 import 'antd/dist/antd.css';
 import {EmployeeManageListColum} from './EmployeeManageColums'; //칼럼
 //import moment from 'moment';
@@ -7,6 +7,7 @@ import {EmployeeManageListColum} from './EmployeeManageColums'; //칼럼
 
 //const { Option } = Select;
 const { Content } = Layout;
+const { Text } = Typography;
 //인쇄 기능
 const printDiv = () => {
     var initBody = document.body.innerHTML;
@@ -30,6 +31,7 @@ function EmployeeManageInfo(props) {
     //const months = ['1','2','3','4','5','6','7','8','9','10','11','12']
     //console.log(props.SelectYear);
     //console.log(props.SelectMonth);
+    console.log(props.User);
     return (
         <Modal
             visible={props.Visible}
@@ -54,6 +56,7 @@ function EmployeeManageInfo(props) {
                         </Select>
                     </div> */}
                     <div style = {{display: 'inline-block', float: 'right'}}>
+                        <Text style={{marginRight:'10px'}}>{props.User.rank} - {props.User.name}</Text>
                         <Button onClick = {printDiv}>인쇄</Button>
                     </div>
                     </div>

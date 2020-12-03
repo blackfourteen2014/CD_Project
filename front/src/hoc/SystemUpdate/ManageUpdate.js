@@ -99,7 +99,7 @@ function ManageUpdate(props) {
     return (
         <>
         <Modal
-          title="추가"
+          title="수정"
           visible={props.UpdateVisible}
           onOk={handleOk}
           onCancel={props.handleUpdateCancel}

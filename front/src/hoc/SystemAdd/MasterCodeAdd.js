@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Modal, Input } from 'antd';
 import { useDispatch } from 'react-redux';
-import { LargeCodeInfo } from '../../_actions/holiday_action';
+import { MasterCodeCreate } from '../../_actions/system_action';
 
 function MasterCodeAdd(props){
   const dispatch = useDispatch(); //redux
@@ -25,7 +25,7 @@ function MasterCodeAdd(props){
       LargeInfo:LargeInfo,
     }
 
-    dispatch(LargeCodeInfo(body))
+    dispatch(MasterCodeCreate(body))
             .then(response => { 
                 if(response.payload.largecodeSaveSuccess){ 
                   window.location.reload();//전체 페이지를 리로드(실제 배포할 때는 리로드할 구역을 살정해야함)

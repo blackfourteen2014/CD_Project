@@ -5,7 +5,8 @@ const port = 5000 //port number
 const bodyParser = require('body-parser');
 //router
 const LoginRouter = require('./lib/LoginSystem'); //로그인, 로그아웃
-const CrudRouter = require('./lib/SystemServer/UserCrud'); //직원 추가,삭제,수정,GET
+const UserCRUDRouter = require('./lib/SystemServer/UserCRUD'); //직원 추가,삭제,수정,GET
+const CodeCRDRouter = require('./lib/SystemServer/CodeCRD');
 //웹에서 application/x-www-form-urlencoded에 있는 데이터를 분석해서 가져옴
   app.use(bodyParser.urlencoded({extended : true}));
 //웹에서 application/json에 있는 데이터를 분석해서 가져옴
@@ -22,57 +23,11 @@ app.use(session({
     store:new mysqlStore(sessionDB)
   }));
 
-//nodejs 연습 및 axios 연습 (삭제예정)======================================================
-//get 가져오는 것. '/'는 주소를 뜻한다. 현재 '/'에 아무것도 안붙으므로 root directory를 뜻한다.
-//req => request(요청), res=> response(응답)
-// app.get('/', (req, res) => { //삭제 예정
-//   res.send('Root => Hello World!/안녕하세요!!!')
-// })
-// //위와 마찬가지. 다만, /users에 연결되어 있다 --삭제 예정
-// app.get('/users', (req, res) => {
-//   db.query('SELECT * from Users', (error, rows) => {
-//     if (error) throw error;
-//     console.log('mysql Connected...');
-//     console.log('User info is: ', rows);
-//     res.send(rows);
-//   });
-// });
-// //axios 연습(해당 주소로 가면 볼 수 있음) --삭제 예정
-// app.get('/api/hello',(req,res)=>{
-//   res.send('안녕하세요~');
-// });
-//=========================================================================================
 //페이지의 복잡성을 해소하기 위한 라우터
 app.use('/api/users', LoginRouter);
-app.use('/api/users', CrudRouter);
+app.use('/api/users', UserCRUDRouter);
+app.use('/api/system', CodeCRDRouter);
 //SystemServer로 옮길 예정================================================================================================
-//대코드 테이블 삭제(주소는 다 소문자로 변경해주면 좋을 거 같음)
-app.post('/api/MasterCodedelete',(req,res)=>{
-  req.body.forEach(user => {
-    //console.log(user.id);
-    db.query(`DELETE FROM mastercode WHERE LargeCode = ?`,[user.LargeCode],function(error,result){
-      if(error){
-        throw error;
-      }
-    });
-  });
-  return res.json({
-    success : true
-  });
-});
-//소코드 테이블 삭제
-app.post('/api/SmallCodedelete',(req,res)=>{
-  req.body.forEach(user => {
-    db.query(`DELETE FROM smallcode WHERE SmallCode = ?`,[user.SmallCode],function(error,result){
-      if(error){
-        throw error;
-      }
-    });
-  });
-  return res.json({
-    success : true
-  });
-});
 //holiday 테이블 삭제
 app.post('/api/holidaydelete',(req,res)=>{
   //console.log(req.body.start);
@@ -85,30 +40,6 @@ app.post('/api/holidaydelete',(req,res)=>{
       });
     });
 });
-//대코드 리스트 검색
-app.post('/api/mastercodelist', (req,res) => {
-  db.query('SELECT * from MasterCode where LargeCode like ?',[`%${req.body.LargeCode}%`],(error,data)=>{
-    if(error) res.send(['']);
-    db.query('SELECT * from SmallCode where SmallCode like ?',[`%${data[0].LargeCode}%`],(error2,rows)=>{
-      if (error2) throw error2;
-      let sendData = [];
-      let data = {};
-      let key = 0;
-     rows.forEach(row => {
-     data = {
-            key: String(key+1),
-            SmallCode: row.SmallCode,
-            SmallInfo: row.SmallInfo,
-            SmallContent: row.SmallContent
-          }
-        key++;
-        sendData.push(data);
-      });
-      res.send(sendData);
-    });
-  });
-});
-
 //근무부서 리스트 검색
 app.post('/api/deptcodelist', (req,res) => {
     db.query('SELECT * from employee where dept like ?',[`%${req.body.SmallInfo}%`],(error,users)=>{
@@ -170,7 +101,6 @@ app.post('/api/employeeworkdeptcodelist', (req,res) => {
     res.send(sendData);
   });
 });
-
 //마이페이지 비밀번호 수정 
 app.post('/api/mypagepasswordedit',(req,res)=>{
   console.log(req.body);
@@ -181,62 +111,6 @@ app.post('/api/mypagepasswordedit',(req,res)=>{
     res.send(result);
   });
 });
-//대코드 수정
-app.post('/api/mastercodeupdate',(req,res)=>{
-  db.query(`UPDATE mastercode SET LargeCode = ? , LargeInfo = ?) VALUES(?,?)`,
-  [req.body.LargeCode, req.body.LargeInfo],(error,result) => {
-        if(error) {
-          return  res.json({
-            holidaySaveSuccess: false,
-              message: "실패"
-              });  
-      }
-      return res.json({
-        holidaySaveSuccess: true,
-          message: "성공"
-          });  
-    });
-});
-//공통코드 관련
-app.get('/api/smallcoderead', (req, res) => {
-  db.query('SELECT * from SmallCode', (error, rows) => {
-    if (error) throw error;
-    let sendData = [];
-    let data = {};
-    let key = 0;
-   rows.forEach(row => {
-   data = {
-          key: String(key+1),
-          SmallCode: row.SmallCode,
-          SmallInfo: row.SmallInfo,
-          SmallContent: row.SmallContent
-        }
-      key++;
-      sendData.push(data);
-    });
-    res.send(sendData);
-  });
-});
-//대코드 테이블
-app.get('/api/MasterCode', (req, res) => {
-  db.query('SELECT * from MasterCode', (error, rows) => {
-    if (error) throw error;
-    let temp = [];
-    let data = {};
-    let i = 0;
-   rows.forEach(row => {
-   data = {
-          key: String(i+1),
-          LargeCode: row.LargeCode,
-          LargeInfo: row.LargeInfo,
-  }
-      i++;
-      temp.push(data);
-    });
-    res.send(temp);
-
-});
-  });
 //휴일설정 db에 저장
 app.post('/api/holidaysave', (req, res) => {
   //console.log(req.body);
@@ -255,56 +129,8 @@ app.post('/api/holidaysave', (req, res) => {
         message: "성공"
         });  
   });
-  // return res.json({
-  //       holidaySaveSuccess: true,
-  //       message: "성공"
-  //       });
 });
-//공통코드 db에 저장
-app.post('/api/smallcodesave', (req, res) => {
-  const code = req.body.LargeCode + req.body.SmallCode;
-  db.query(`INSERT INTO smallcode(SmallCode,SmallInfo,SmallContent) VALUES(?,?,?)`,
-  [code, req.body.SmallInfo,req.body.SmallContent],(error,result) => {
-    if(error) {
-      return  res.json({
-        smallcodeSaveSuccess: false,
-          message: "실패"
-          });  
-  }
-  return res.json({
-    smallcodeSaveSuccess: true,
-      message: "성공" 
-      });  
-});
-});
-
-//대코드 db에 저장
-app.post('/api/mastercodesave', (req, res) => {
-  db.query(`INSERT INTO mastercode(LargeCode,LargeInfo) VALUES(?,?)`,
-  [req.body.LargeCode, req.body.LargeInfo],(error,result) => {
-    if(error) {
-      return  res.json({
-        largecodeSaveSuccess: false,
-          message: "실패"
-          });  
-  }
-  return res.json({
-    largecodeSaveSuccess: true,
-      message: "성공" 
-      });  
-});
-});
-
-// //공통코드 테이블 대코드 까지 뜨게하는건데 보류
-// app.get('/api/codetable', (req, res) => {
-//   //db.query('SELECT LargeCode,smallcode,SmallInfo,SmallContent FROM mastercode RIGHT JOIN smallcode ON LEFT(SmallCode, 2) = LargeCode;', (error, rows) => {
-//   db.query('SELECT * from SmallCode', (error, rows) => {
-//     if (error) throw error;
-//     console.log('holiday date\n', rows);
-//     res.send(rows);
-//   });
-// });
-
+//휴일 데이터 READ
 app.get('/api/holidaydataread', (req, res) => {
   db.query('SELECT holi.StartDate,small.SmallInfo FROM holiday AS holi JOIN SmallCode AS small ON small.SmallCode = holi.holimanage;', (error, lists) => {
     if (error) throw error;
@@ -363,35 +189,6 @@ app.get('/api/ranklist', (req,res) => {
     });
   });
 });
-//스몰 코드 수정할 데이터
-// app.post('/api/updatecode',(req,res)=>{
-//   //console.log(req.body);
-//   //console.log(req.body.SmallCode.split('-'));
-//   const updateCode = req.body;
-//   const splitCode = req.body.SmallCode.split('-');
-//   let data = {
-//     masterCode: splitCode[0],
-//     smallCode : splitCode[1],
-//     smallCodeInfo : updateCode.SmallInfo,
-//     smallCodeContent : updateCode.SmallContent
-//   }
-//   res.send(data);
-// });
-// 스몰 코드 수정
-// app.post('/api/smallcodeupdate',(req,res)=>{
-//   console.log(req.body);
-//   const code = req.body.LargeCode+'-'+req.body.SmallCode;
-//   console.log(code);
-//   // db.query('UPDATE SmallCode SET SmallCode = ?, SmallInfo = ?, SmallContent = ? where SmallCode = ?',
-//   // [con],
-//   // (error,updateCode)=>{
-//   //   if(error) throw error;
-
-//   // });
-//   res.json({
-//     smallcodeSuccess : true
-//   });
-// });
 //==============================================================================================================================
 
 //UserServer로 옮길 예정=========================================================================================================
@@ -573,7 +370,7 @@ app.get('/api/workmanageread',(req,res)=>{
   let sendData = [];
   let data = {};
   let i = 0;
-  db.query('SELECT * from WorkManage Join employee ON employee.id = WorkManage.sendId where WorkManage.getId = ?',[req.session.userId],(error,reads)=>{
+  db.query('SELECT * from WorkManage Join employee ON employee.id = WorkManage.sendId where WorkManage.getId = ? ORDER BY startDate DESC',[req.session.userId],(error,reads)=>{
     if (error) throw error;
     //console.log(reads);
     reads.forEach(read => {

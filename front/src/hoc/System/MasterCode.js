@@ -17,15 +17,9 @@ function MasterCode(props) {
       setCheckTarget(selectedRows);
     }
   };
-   //수정
-//  const handleSave = () =>{
-//    axios.post('/api/mastercodeupdate', CheckTarget).then(response => {
-   
-//    });
-//   }
   //delete
   const handleDelete = () => {
-    axios.post('/api/MasterCodedelete', CheckTarget).then(res =>{
+    axios.post('/api/system/mastercodedelete', CheckTarget).then(res =>{
      if(res.data.success){
      alert('삭제되었습니다.');
      window.location.reload();
@@ -47,7 +41,7 @@ function MasterCode(props) {
   }
   //공통 코드 데이터 조회
   useEffect(() => {
-    axios.get('/api/MasterCode').then(response => {
+    axios.get('/api/system/mastercoderead').then(response => {
       setData(response.data);
       console.log(response.data);
     });
