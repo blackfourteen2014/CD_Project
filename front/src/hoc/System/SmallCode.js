@@ -28,7 +28,7 @@ function Code() {
  };
   //delete
  const handleDelete = () => {
-   axios.post('/api/SmallCodedelete', CheckTarget).then(res =>{
+   axios.post('/api/system/smallcodedelete', CheckTarget).then(res =>{
     if(res.data.success){
     alert('삭제되었습니다.');
     window.location.reload();
@@ -51,7 +51,7 @@ function Code() {
   //대코드 종류선택
   function onChange(value) {
     if(value === 'All'){
-      axios.get('/api/smallcoderead').then(response => {  
+      axios.get('/api/system/smallcoderead').then(response => {  
         setSmallCode(response.data);
       });
     }
@@ -59,7 +59,7 @@ function Code() {
       let body = {
       LargeCode : value
        }
-     axios.post('/api/mastercodelist',body).then(response => {
+     axios.post('/api/system/mastercodesearchlistread',body).then(response => {
      console.log(response.data);
      setSmallCode(response.data);
       });
@@ -67,11 +67,11 @@ function Code() {
   }
   //공통 코드 데이터 조회
   useEffect(() => {
-    axios.get('/api/smallcoderead').then(response => {  
+    axios.get('/api/system/smallcoderead').then(response => {  
       //console.log('smallcode : ',response.data);
       setSmallCode(response.data);
     });
-    axios.get('/api/mastercode').then(response => {
+    axios.get('/api/system/mastercoderead').then(response => {
       //console.log('mastercode : ',response.data);
       setMasterData(response.data);
     });

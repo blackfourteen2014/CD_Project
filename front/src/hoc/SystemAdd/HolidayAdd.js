@@ -3,7 +3,7 @@ import { Select, Modal, Alert, Input} from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { holidayInfo } from '../../_actions/holiday_action';
+import { holidayInfo } from '../../_actions/system_action';
 import moment from 'moment'
 
 const { Option } = Select;

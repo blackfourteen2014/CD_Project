@@ -15,8 +15,8 @@ export function holidayInfo(dataToSubmit){
         payload: request //서버의 res.json() 값을 가져온다.
     }
 }
-export function SmallCodeInfo(dataToSubmit){
-    const request = axios.post('/api/smallcodesave', dataToSubmit)
+export function SmallCodeCreate(dataToSubmit){
+    const request = axios.post('/api/system/smallcodecreate', dataToSubmit)
         .then(response => response.data)
 
     return {
@@ -25,8 +25,8 @@ export function SmallCodeInfo(dataToSubmit){
     }
 }
 
-export function LargeCodeInfo(dataToSubmit){
-    const request = axios.post('/api/mastercodesave', dataToSubmit)
+export function MasterCodeCreate(dataToSubmit){
+    const request = axios.post('/api/system/mastercodecreate', dataToSubmit)
         .then(response => response.data)
 
     return {
