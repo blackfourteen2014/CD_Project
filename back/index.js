@@ -5,8 +5,9 @@ const port = 5000 //port number
 const bodyParser = require('body-parser');
 //router
 const LoginRouter = require('./lib/LoginSystem'); //로그인, 로그아웃
-const UserCRUDRouter = require('./lib/SystemServer/UserCRUD'); //직원 추가,삭제,수정,GET
-const CodeCRDRouter = require('./lib/SystemServer/CodeCRD');
+const UserRouter = require('./lib/SystemServer/UserCRUD'); //직원 추가,읽기,삭제,수정
+const CodeRouter = require('./lib/SystemServer/CodeCRD');
+const MypageRouter = require('./lib/UserServer/MypageRU');
 //웹에서 application/x-www-form-urlencoded에 있는 데이터를 분석해서 가져옴
   app.use(bodyParser.urlencoded({extended : true}));
 //웹에서 application/json에 있는 데이터를 분석해서 가져옴
@@ -25,8 +26,9 @@ app.use(session({
 
 //페이지의 복잡성을 해소하기 위한 라우터
 app.use('/api/users', LoginRouter);
-app.use('/api/users', UserCRUDRouter);
-app.use('/api/system', CodeCRDRouter);
+app.use('/api/users', MypageRouter);
+app.use('/api/system', UserRouter);
+app.use('/api/system', CodeRouter);
 //SystemServer로 옮길 예정================================================================================================
 //holiday 테이블 삭제
 app.post('/api/holidaydelete',(req,res)=>{
@@ -99,16 +101,6 @@ app.post('/api/employeeworkdeptcodelist', (req,res) => {
       key++;
     });
     res.send(sendData);
-  });
-});
-//마이페이지 비밀번호 수정 
-app.post('/api/mypagepasswordedit',(req,res)=>{
-  console.log(req.body);
-  db.query(`UPDATE employee SET PASSWORD = ? , PASSWORD = ? WHERE id = ? `,
-  [req.body.UserPassword, req.body.Password, req.body.id],(error,result) => {
-    if(error) res.send(['']);
-    //console.log(depts);
-    res.send(result);
   });
 });
 //휴일설정 db에 저장
@@ -286,33 +278,6 @@ app.post('/api/worklist', (req, res) => {
       workList : temp,
       workTimeSum
     });
-  });
-});
-
-//mypage조회
-app.get('/api/mypage', (req, res) => {
-  db.query('SELECT * from employee where id =?',[req.session.userId], (error, user) => {
-    if (error) throw error;
-    //console.log('User info is \n', user);
-    res.send(user);
-  });
-});
-//mypage확인
-app.post('/api/mypagecheck', (req, res) => {
-  //console.log('1:',req.body.Password);
-  //console.log('2:',req.session.userId);
-  db.query('SELECT * from employee where id =?',[req.session.userId], (error, user) => {
-    if (error) throw error;
-    //console.log('User info is \n', user[0].password);
-    if(user[0].password === req.body.Password){
-      return res.json({
-        success : true
-      });
-    }else{
-      return res.json({
-        success : false
-      });
-    }
   });
 });
 

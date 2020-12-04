@@ -6,23 +6,22 @@ import MyPageUpdate from './MyPageUpdate';
 import '../../user.css';
 
 // 불러오는 곳
-
 const { Content } = Layout;
 
 function MyPage() {
   const [User, setUser] = useState(['']);
   const [Password, setPassword] = useState('');//바꿀비밀번호
-  const [CkPassword, setCkPassword] = useState('');//바꿀비밀번호확인
+  const [CheckPassword, setCheckPassword] = useState('');//바꿀비밀번호확인
 
   const handleChangePassword = (e) => {
     setPassword(e.currentTarget.value);
   }
-  const handleChangeCkPassword = (e) => {
-    setCkPassword(e.currentTarget.value);
+  const handleChangeCheckPassword = (e) => {
+    setCheckPassword(e.currentTarget.value);
   }
   useEffect(() => {
-    console.log(Password);
-    axios.get('/api/mypage').then(response => {
+    //console.log(Password);
+    axios.get('/api/users/mypageread').then(response => {
       setUser(response.data);
     });
     
@@ -38,20 +37,8 @@ function MyPage() {
      };
     const handleOk = () => {
       setVisible(false);
-      if(Password == CkPassword){
-        let body = {
-          Password : Password,
-          UserPassword : User[0].password,
-          id : User[0].id
-        }
-        axios.post('/api/mypagepasswordedit',body).then(response => {
-          alert('비밀번호가 변경되었습니다');
-          window.location.reload();
-        });
-      }else{
-        alert('비밀번호가 일치하지 않습니다');
-      }
     }
+    //마이페이지 취소 버튼
     const handleUpdateCancel = () => {
       window.location.reload();
     }
@@ -77,7 +64,7 @@ function MyPage() {
                     <Input.Password value={Password} onChange={handleChangePassword} placeholder="새로운 비밀번호 입력"/>
                   </Descriptions.Item>
                   <Descriptions.Item label="새로운 비밀번호 확인" span={3}>
-                    <Input.Password value={CkPassword} onChange={handleChangeCkPassword} placeholder="새로운 비밀번호 확인"/>
+                    <Input.Password value={CheckPassword} onChange={handleChangeCheckPassword} placeholder="새로운 비밀번호 확인"/>
                   </Descriptions.Item>
                   <Descriptions.Item label="이메일" span={3}>
                     {User[0].email}
@@ -95,7 +82,14 @@ function MyPage() {
               <div className = "btn">
                   <Button onClick= {handleUpdateCancel}>취소</Button>
                   <Button onClick = {showModal}>확인</Button>
-                  <MyPageUpdate Visible={Visible} handleOk={handleOk} handleCancel={handleCancel}/>
+                  <MyPageUpdate 
+                    Visible={Visible} 
+                    handleOk={handleOk} 
+                    handleCancel={handleCancel}
+                    Password = {Password}
+                    CheckPassword = {CheckPassword}
+                    User = {User}
+                  />
               </div>
           </div>
         </Content>

@@ -20,7 +20,7 @@ export function loginUser(dataToSubmit){
 }
 //직원 추가 액션
 export function createUser(dataToSubmit){
-    const request = axios.post('/api/users/create', dataToSubmit)
+    const request = axios.post('/api/system/create', dataToSubmit)
         .then(response => response.data)
     
     return {
@@ -30,7 +30,7 @@ export function createUser(dataToSubmit){
 }
 // 직원 수정 액션
 export function updateUser(dataToSubmit){
-    const request = axios.post('/api/users/update', dataToSubmit)
+    const request = axios.post('/api/system/update', dataToSubmit)
         .then(response => response.data)
     
     return {
@@ -68,9 +68,9 @@ export function HolidayUser(dataToSubmit){
         payload: request //true,false를 받는 부분
     }
 }
-//마이페이지 체크
-export function myPageUser(dataToSubmit){
-    const request = axios.post('/api/mypagecheck', dataToSubmit)
+//마이페이지 PasswordCheck
+export function MyPagePasswordCheck(dataToSubmit){
+    const request = axios.post('/api/users/mypagepasswordcheck', dataToSubmit)
         .then(response => response.data)
     
     return {
