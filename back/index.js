@@ -5,9 +5,10 @@ const port = 5000 //port number
 const bodyParser = require('body-parser');
 //router
 const LoginRouter = require('./lib/LoginSystem'); //로그인, 로그아웃
-const UserRouter = require('./lib/SystemServer/UserCRUD'); //직원 추가,읽기,삭제,수정
-const CodeRouter = require('./lib/SystemServer/CodeCRD');
-const MypageRouter = require('./lib/UserServer/MypageRU');
+const UserRouter = require('./lib/SystemServer/User'); //직원 추가,읽기,삭제,수정
+const CodeRouter = require('./lib/SystemServer/Code');
+const MypageRouter = require('./lib/UserServer/Mypage');
+const HolidayRouter = require('./lib/SystemServer/Holiday');
 //웹에서 application/x-www-form-urlencoded에 있는 데이터를 분석해서 가져옴
   app.use(bodyParser.urlencoded({extended : true}));
 //웹에서 application/json에 있는 데이터를 분석해서 가져옴
@@ -29,19 +30,9 @@ app.use('/api/users', LoginRouter);
 app.use('/api/users', MypageRouter);
 app.use('/api/system', UserRouter);
 app.use('/api/system', CodeRouter);
+app.use('/api/system', HolidayRouter);
 //SystemServer로 옮길 예정================================================================================================
-//holiday 테이블 삭제
-app.post('/api/holidaydelete',(req,res)=>{
-  //console.log(req.body.start);
-    db.query(`DELETE FROM Holiday WHERE StartDate = ?`,[req.body.start],function(error,result){
-      if(error){
-        throw error;
-      }
-      return res.json({
-        success : true
-      });
-    });
-});
+
 //근무부서 리스트 검색
 app.post('/api/deptcodelist', (req,res) => {
     db.query('SELECT * from employee where dept like ?',[`%${req.body.SmallInfo}%`],(error,users)=>{
@@ -101,44 +92,6 @@ app.post('/api/employeeworkdeptcodelist', (req,res) => {
       key++;
     });
     res.send(sendData);
-  });
-});
-//휴일설정 db에 저장
-app.post('/api/holidaysave', (req, res) => {
-  //console.log(req.body);
-  db.query(`INSERT INTO holiday(StartDate,HoliManage,HoliContent) VALUES(?,?,?)`,
-    [req.body.StartDate, req.body.SaveCode, req.body.HoliContent],(error,result) => 
-  {
-    if(error) 
-    {
-      return  res.json({
-        holidaySaveSuccess: false,
-          message: "실패"
-          });  
-    }
-    return res.json({
-      holidaySaveSuccess: true,
-        message: "성공"
-        });  
-  });
-});
-//휴일 데이터 READ
-app.get('/api/holidaydataread', (req, res) => {
-  db.query('SELECT holi.StartDate,small.SmallInfo FROM holiday AS holi JOIN SmallCode AS small ON small.SmallCode = holi.holimanage;', (error, lists) => {
-    if (error) throw error;
-    //console.log('holiday date\n', lists);
-    let temp = [];
-    let data = {};
-    lists.forEach(list => {
-      data = {
-        title : list.SmallInfo,
-        start : list.StartDate,
-        end : list.StartDate,
-        allDay : false
-      }
-      temp.push(data);
-    });
-    res.send(temp);
   });
 });
 //휴일종류코드리스트

@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import { Layout, PageHeader, Button, Breadcrumb, Modal } from 'antd';
+import { Layout, PageHeader, Button, Modal } from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -12,30 +12,16 @@ import './Calendar.scss' //scss 재정의=======================================
 import SideBarSystem from '../../utils/SideBarSystem';
 
 const localizer = momentLocalizer(moment)
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 function Holiday(props) {
   const [ListData, setListData] = useState([]);
 
   useEffect(() => {         
-    axios.get('/api/holidaydataread').then(response => {
-      // response.data.map(listData => (
-      // console.log(response.data);
-      // ));
+    axios.get('/api/system/holidayread').then(response => {
       setListData(response.data);
     });
 }, []);
-  // //delete
-  // const handleDelete = (value) => {
-  //   console.log(value);
-  //   axios.post('/api/holidaydelete', value).then(res =>{
-
-  //    if(res.data.success){
-  //    alert('삭제되었습니다.');
-  //    window.location.reload();
-  //     }
-  //   })
-  // }
   //삭제 모달창 구현================================================================================
   const [Delvisible, setDelVisible] = useState(false);
   const showModal = (value) => {
@@ -49,7 +35,7 @@ function Holiday(props) {
   //ok눌렀을때
   const DelhandleOk = () => {
     setDelVisible(false);
-    axios.post('/api/holidaydelete',Delvisible).then(res =>{
+    axios.post('/api/system/holidaydelete',Delvisible).then(res =>{
       if(res.data.success){
       window.location.reload();
        }
@@ -132,14 +118,7 @@ function Holiday(props) {
             subTitle="휴일설정 페이지"
             style={{background: '#fff'}}
           /> 
-            {/* </Header> */}
             <Content>
-            {/* <Breadcrumb style = {{background: '#fff', minHeight: 10}}>
-                <Breadcrumb.Item>
-                  
-                </Breadcrumb.Item>
-              </Breadcrumb>  */}
-              {/* 캘린더 */}
               <Modal
                     visible={Delvisible}
                     centered

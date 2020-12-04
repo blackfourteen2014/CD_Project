@@ -19,9 +19,6 @@ function ManageUpdate(props) {
     const [Dept, setDept] = useState(props.UserData.dept);
     const [Rank, setRank] = useState(props.UserData.rank);
     //state 값
-    // const handleChangeId = (e) => {
-    //     setId(e.currentTarget.value);
-    // }
     const handleChangeName = (e) => {
         setName(e.currentTarget.value);
     }
@@ -83,7 +80,6 @@ function ManageUpdate(props) {
                 })
         }
     }
-        //console.log(props.UserData.id);
     //부서코드
     const [DeptList, setDeptList] = useState(['']);
     const [RankList, setRankList] = useState(['']);
@@ -120,15 +116,12 @@ function ManageUpdate(props) {
             <div>사원번호</div>
             <Input 
             placeholder=""
-            //defaultValue={props.UserData.id}
             value={Id}
-            //onChange={handleChangeId}
             disabled = {true}
             />
             <div>사원이름</div>
             <Input 
             placeholder=""
-            //defaultValue={props.UserData.name}
             value={Name}
             onChange={handleChangeName}
             />
@@ -143,7 +136,6 @@ function ManageUpdate(props) {
             <div>이메일</div>
             <Input 
             placeholder=""
-            //defaultValue={props.UserData.email}
             value={Email}
             onChange={handleChangeEmail}
             />
@@ -151,7 +143,6 @@ function ManageUpdate(props) {
             <div>핸드폰번호</div>
             <Input 
             placeholder=""
-            //defaultValue={props.UserData.phone}
             value={Phone}
             onChange={handleChangePhone}
             />
@@ -159,7 +150,6 @@ function ManageUpdate(props) {
             <div>우편번호</div>
             <Input 
             placeholder=""
-            //defaultValue={props.UserData.zim}
             value={Zim}
             onChange={handleChangeZim}
             />
@@ -167,7 +157,6 @@ function ManageUpdate(props) {
             <div>주소</div>
             <Input 
             placeholder=""
-            //defaultValue={props.UserData.address}
             value={Address}
             onChange={handleChangeAddress}
             />
@@ -175,7 +164,6 @@ function ManageUpdate(props) {
             <div>비고</div>
             <Input 
             placeholder="*NULL 가능"
-            //defaultValue={props.UserData.des}
             value={Des}
             onChange={handleChangeDes}
             />
