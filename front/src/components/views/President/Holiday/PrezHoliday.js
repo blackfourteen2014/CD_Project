@@ -6,7 +6,6 @@ import LoginedUser from '../../../../utils/LoginedUser';
 import LogoutUser from '../../../../utils/LogoutUser';
 import SideBar from '../../../../utils/SideBarPresident';
 import HolidayUserAdd from '../../Employee/HolidayUser/HolidayUserAdd';
-//import PrezHoliConfirm from './PrezHoliConfim';
 import { Calendar, momentLocalizer } from 'react-big-calendar' //캘린더============
 import moment from 'moment'
 import 'react-big-calendar/lib/sass/styles.scss';
@@ -14,7 +13,7 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.scss';
 import './Calendar.scss' //scss 재정의=============================================
 import { prezHoliColumns } from './PrezHoliColumns';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const localizer = momentLocalizer(moment)
 
 function PrezHoli(props){
@@ -141,11 +140,9 @@ function PrezHoli(props){
               <Button className = "btn" onClick = {showModal}>연가신청</Button>
               <HolidayUserAdd Visible={Visible} handleCancel={handleCancel} handleOk={handleOk} />
               <Button className = "btn" onClick = {handleConfirm}>연가승인</Button>
-              {/* <PrezHoliConfirm Visible={ConfirmVisible} handleCancel={handleCancel} handleOk={handleOk} /> */}
               <Table 
               columns={prezHoliColumns} 
               dataSource={HolidayUserData} 
-              //pagination={false} 
               rowSelection={rowSelection}/>
             </Content>
           </Layout>
