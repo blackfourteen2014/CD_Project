@@ -4,35 +4,43 @@ const app = express(); //funtion을 이용하여 새로운 express app을 만듬
 const port = 5000 //port number
 const bodyParser = require('body-parser');
 //router
+//all
 const LoginRouter = require('./lib/LoginSystem'); //로그인, 로그아웃
+//user
+const MypageRouter = require('./lib/UserServer/Mypage'); //유저 마이페이지 기능
+const OnOffWorkRouter = require('./lib/UserServer/OnOffWork'); //유저 출퇴근 기능
+const UserControllerRouter = require('./lib/UserServer/UserController'); //유저 기능과 관련된 전반적인 제어장치
+//system
 const UserRouter = require('./lib/SystemServer/User'); //직원 추가,읽기,삭제,수정
 const CodeRouter = require('./lib/SystemServer/Code');
-const MypageRouter = require('./lib/UserServer/Mypage');
 const HolidayRouter = require('./lib/SystemServer/Holiday');
 //웹에서 application/x-www-form-urlencoded에 있는 데이터를 분석해서 가져옴
-  app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.urlencoded({extended : true}));
 //웹에서 application/json에 있는 데이터를 분석해서 가져옴
-  app.use(bodyParser.json());
+app.use(bodyParser.json());
 //session 사용 모듈
 const session = require('express-session');
 const mysqlStore = require('express-mysql-session')(session);
 const sessionDB = require('./config/sessionDB');
 //session 사용
 app.use(session({
-    secret: 'asdqwe##',
-    resave: false,
-    saveUninitialized: true,
-    store:new mysqlStore(sessionDB)
-  }));
-
-//페이지의 복잡성을 해소하기 위한 라우터
-app.use('/api/users', LoginRouter);
+  secret: 'asdqwe##',
+  resave: false,
+  saveUninitialized: true,
+  store:new mysqlStore(sessionDB)
+}));
+//기능의 복잡성을 해소하기 위한 라우터 사용
+//all
+app.use('/api', LoginRouter); //로그인
+//user
+app.use('/api/users', UserControllerRouter);
 app.use('/api/users', MypageRouter);
+app.use('/api/users', OnOffWorkRouter)
+//system
 app.use('/api/system', UserRouter);
 app.use('/api/system', CodeRouter);
 app.use('/api/system', HolidayRouter);
 //SystemServer로 옮길 예정================================================================================================
-
 //근무부서 리스트 검색
 app.post('/api/deptcodelist', (req,res) => {
     db.query('SELECT * from employee where dept like ?',[`%${req.body.SmallInfo}%`],(error,users)=>{
@@ -135,61 +143,7 @@ app.get('/api/ranklist', (req,res) => {
   });
 });
 //==============================================================================================================================
-
 //UserServer로 옮길 예정=========================================================================================================
-//출근 버튼(메인페이지 출근 버튼 누르고 또 누르면 출근을 이미 하였다고 뜨기)
-app.post('/api/onWork',(req, res) => {
-      db.query('SELECT * from employeeWork where id=? AND Date=?',[req.session.userId,req.body.date],(error, userDate) => {
-        if(userDate[0] === undefined){ //다른 날짜 유무
-          db.query(`INSERT INTO employeeWork(DATE,OnWork,id) VALUES(?,?,?)`,
-          [req.body.date, req.body.time, req.session.userId],(error,result) => {
-            if(error) throw error;
-            return res.json({
-              success : true,
-              message:'ok'
-            });
-          });
-        } else {
-            return res.json({
-              success : false,
-              message:'no'
-            });
-        }
-      });
-    });
-//퇴근 버튼
-app.post('/api/offWork',(req, res) => {
-  //console.log(req.body);
-  db.query('SELECT * from employeeWork where id=? AND Date=?',[req.session.userId,req.body.date],(error, userDate) => {
-    //console.log(userDate);
-    if(userDate[0] != undefined){
-      db.query(`update employeeWork SET OffWork =?,WorkContent=?,OverWorkContent=? where id=? AND Date=?`,
-      [req.body.time,req.body.WorkContent,req.body.OverWorkContent,req.session.userId,req.body.date],(error,result) => {
-        if(error) throw error;
-        return res.json({
-          success : true,
-          message:'ok'
-        });
-      });
-    } else {
-        return res.json({
-          success : false,
-          message:'no'
-        });
-    }
-  });
-});
-//로그인한 유저 정보
-app.get('/api/userInfo',(req, res) => {
-  //console.log(req.session.userId);
-  db.query('SELECT * from employee where id = ?',[req.session.userId],(error, rows) => {
-    if (error) throw error;
-    return res.json({
-      userID : rows[0].id,
-      userName : rows[0].name
-    });
-  });
-});
 //근무조회
 app.post('/api/worklist', (req, res) => {
   //console.log(req.body);

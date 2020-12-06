@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal } from 'antd';
 import { useDispatch } from 'react-redux';
-import {onWorkUser} from '../_actions/user_action';
+import {OnWorkUser} from '../_actions/user_action';
 
 function OnWork(props) {
     const dispatch = useDispatch(); //redux
@@ -11,7 +11,7 @@ function OnWork(props) {
             date:props.Date,
             time:props.Time
         }
-        dispatch(onWorkUser(body))
+        dispatch(OnWorkUser(body))
                 .then(response => { 
                     console.log(response);
                     if(response.payload.success){ 

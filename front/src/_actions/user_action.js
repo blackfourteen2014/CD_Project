@@ -10,7 +10,7 @@ import {
 } from './types';
 //dataToSubmit에는 넘어온 body 데이터가 들어가 있다.;로그인 액션
 export function loginUser(dataToSubmit){
-    const request = axios.post('/api/users/login', dataToSubmit)
+    const request = axios.post('/api/login', dataToSubmit)
         .then(response => response.data)
 
     return {
@@ -39,8 +39,8 @@ export function updateUser(dataToSubmit){
     }
 }
 //출근 버튼 액션
-export function onWorkUser(dataToSubmit){
-    const request = axios.post('/api/onWork', dataToSubmit)
+export function OnWorkUser(dataToSubmit){
+    const request = axios.post('/api/users/onwork', dataToSubmit)
         .then(response => response.data)
     
     return {
@@ -49,8 +49,8 @@ export function onWorkUser(dataToSubmit){
     }
 }
 //퇴근 버튼 액션
-export function offWorkUser(dataToSubmit){
-    const request = axios.post('/api/offWork', dataToSubmit)
+export function OffWorkUser(dataToSubmit){
+    const request = axios.post('/api/users/offwork', dataToSubmit)
         .then(response => response.data)
     
     return {

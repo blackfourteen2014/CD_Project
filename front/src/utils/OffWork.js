@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { Modal,Input } from 'antd';
 import { useDispatch } from 'react-redux';
-import { offWorkUser } from '../_actions/user_action';
+import { OffWorkUser } from '../_actions/user_action';
 
 function OffWork(props) {
     const dispatch = useDispatch(); //redux
@@ -23,7 +23,7 @@ function OffWork(props) {
             WorkContent,
             OverWorkContent
         }
-        dispatch(offWorkUser(body))
+        dispatch(OffWorkUser(body))
                 .then(response => { 
                     console.log(response);
                     if(response.payload.success){ 
