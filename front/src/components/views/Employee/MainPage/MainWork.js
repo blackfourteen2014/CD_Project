@@ -35,7 +35,7 @@ function MainWork(){
       CurrentYear,
       CurrentMonth
     }
-    axios.post('/api/worklist',body).then(response => {
+    axios.post('/api/users/mainworkread',body).then(response => {
       //console.log(response.data);
       setData(response.data.workList);
       setWorkTimeSum(response.data.workTimeSum);
@@ -53,7 +53,7 @@ function MainWork(){
       CurrentYear : Year,
       CurrentMonth
     }
-    axios.post('/api/worklist',body).then(response => {
+    axios.post('/api/users/mainworkread',body).then(response => {
       //console.log(response.data);
       setData(response.data.workList);
       setWorkTimeSum(response.data.workTimeSum);
@@ -68,7 +68,7 @@ function MainWork(){
       CurrentYear,
       CurrentMonth : Month
     }
-    axios.post('/api/worklist',body).then(response => {
+    axios.post('/api/users/mainworkread',body).then(response => {
       //console.log(response.data);
       setData(response.data.workList);
       setWorkTimeSum(response.data.workTimeSum);

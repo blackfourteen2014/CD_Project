@@ -58,9 +58,9 @@ export function OffWorkUser(dataToSubmit){
         payload: request //true,false를 받는 부분
     }
 }
-//연가 액션
-export function HolidayUser(dataToSubmit){
-    const request = axios.post('/api/holidayuserinsert', dataToSubmit)
+//연가 유저 데이터 Create
+export function HolidayUserCreate(dataToSubmit){
+    const request = axios.post('/api/users/holidayusercreate', dataToSubmit)
         .then(response => response.data)
     
     return {

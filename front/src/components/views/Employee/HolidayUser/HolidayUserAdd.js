@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { Modal, Descriptions, Input, Select, DatePicker} from 'antd';
 import { useDispatch } from 'react-redux';
-import {HolidayUser} from '../../../../_actions/user_action';
+import {HolidayUserCreate} from '../../../../_actions/user_action';
 import '../../user.css';
 
 const { Option } = Select; //선택한 옵션 기능
@@ -40,9 +40,7 @@ function HolidayUserAdd(props) {
             Des
         }
         
-        console.log(body);
-
-        dispatch(HolidayUser(body))
+        dispatch(HolidayUserCreate(body))
         .then(response => { 
             if(response.payload.success){ 
               window.location.reload();//전체 페이지를 리로드(실제 배포할 때는 리로드할 구역을 살정해야함)

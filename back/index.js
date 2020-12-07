@@ -10,6 +10,8 @@ const LoginRouter = require('./lib/LoginSystem'); //로그인, 로그아웃
 const MypageRouter = require('./lib/UserServer/Mypage'); //유저 마이페이지 기능
 const OnOffWorkRouter = require('./lib/UserServer/OnOffWork'); //유저 출퇴근 기능
 const UserControllerRouter = require('./lib/UserServer/UserController'); //유저 기능과 관련된 전반적인 제어장치
+const MainWorkRouter = require('./lib/UserServer/MainWork'); //유저 메인화면 근무조회 기능
+const HolidayUser = require('./lib/UserServer/HolidayUser'); //유저 연가 기능
 //system
 const UserRouter = require('./lib/SystemServer/User'); //직원 추가,읽기,삭제,수정
 const CodeRouter = require('./lib/SystemServer/Code');
@@ -35,7 +37,9 @@ app.use('/api', LoginRouter); //로그인
 //user
 app.use('/api/users', UserControllerRouter);
 app.use('/api/users', MypageRouter);
-app.use('/api/users', OnOffWorkRouter)
+app.use('/api/users', OnOffWorkRouter);
+app.use('/api/users', MainWorkRouter);
+app.use('/api/users', HolidayUser);
 //system
 app.use('/api/system', UserRouter);
 app.use('/api/system', CodeRouter);
@@ -144,82 +148,6 @@ app.get('/api/ranklist', (req,res) => {
 });
 //==============================================================================================================================
 //UserServer로 옮길 예정=========================================================================================================
-//근무조회
-app.post('/api/worklist', (req, res) => {
-  //console.log(req.body);
-  const selectDate = req.body.CurrentYear + '/' + req.body.CurrentMonth;
-  //console.log(selectDate);
-  db.query('SELECT * from employeeWork where id=? and Date like ?',[req.session.userId,`${selectDate}%`], (error, works) => {
-    if (error) throw error;
-    let temp = [];
-    let data = {};
-    let i = 0;
-    let workTime = 0;
-    let workTimeSum = 0;
-    works.forEach(work => {
-      //console.log('OnWork: ',work.OnWork);
-      //console.log('OnWorkSplit: ',Number(work.OnWork.split(':')[0]));
-      //console.log('OffWork: ',work.OffWork);
-      //console.log('OffWorkSplit: ',Number(work.OffWork.split(':')[0]));
-      //console.log('workTime:',Number(work.OffWork.split(':')[0]) - Number(work.OnWork.split(':')[0]));
-      if(work.OffWork != null){
-        workTime = Number(work.OffWork.split(':')[0]) - Number(work.OnWork.split(':')[0]);
-        workTimeSum += workTime;
-      }else{
-        workTime=0;
-      }
-      data = {
-        key : String(i+1),
-        date : work.Date,
-        onWork: work.OnWork,
-        offWork: work.OffWork,
-        workTime: workTime,
-        workContent: work.WorkContent,
-        overWorkContent: work.OverWorkContent
-      }
-      temp.push(data);
-      i++;
-    });
-    //res.send(temp);
-    return res.json({
-      workList : temp,
-      workTimeSum
-    });
-  });
-});
-
-//연가 데이터 넣기 *테이블 이름과 주소 바꿀 예정
-app.post('/api/holidayuserinsert',(req,res) => {
-  //console.log(req.body);
-  db.query('INSERT INTO HolidayUser (id,StartDate,EndDate,SelectedLeave,Des,confirmYN) VALUES(?,?,?,?,?,?)',
-  [req.session.userId,req.body.StartDate,req.body.EndDate,req.body.SelectedLeave,req.body.Des,'승인대기'], (error, user) => {
-    if (error) throw error;
-    return res.json({
-      success : true
-    });
-  });
-});
-//연가 데이터 조회
-app.get('/api/holidayuserlist', (req, res) => {
-  db.query('SELECT * from HolidayUser where id=?',[req.session.userId], (error, lists) => {
-    if (error) throw error;
-    let temp = [];
-    let data = {};
-    lists.forEach(list => {
-      //console.log(list);
-      data = {
-        id : list.id,
-        startDate: list.StartDate,
-        endDate: list.EndDate,
-        type: list.SelectedLeave,
-        content: list.Des,
-        confirmYN : list.confirmYN
-      }
-      temp.push(data);
-    });
-    res.send(temp);
-  });
-});
 //업무 지시 데이터 저장
 app.post('/api/workmanagesave',(req,res)=>{
   let success = true; //성공여부

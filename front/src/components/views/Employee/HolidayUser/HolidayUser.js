@@ -28,7 +28,7 @@ function HolidayUser(props) {
       setListData(response.data);
     });
     //HolidayUser
-    axios.get('/api/holidayuserlist').then(response => {
+    axios.get('/api/users/holidayuserdataread').then(response => {
       setHolidayUserData(response.data);
     });
 }, []);
