@@ -1,7 +1,7 @@
 import React,{ useState,useEffect } from 'react';
 import { Modal, Select,Input } from 'antd';
 import { useDispatch } from 'react-redux';
-import { updateUser } from '../../_actions/user_action';
+import { UserUpdate } from '../../_actions/system_action';
 import axios from 'axios';
 
 const { Option } = Select;
@@ -67,7 +67,7 @@ function ManageUpdate(props) {
             alert('비밀번호를 입력해주세요.');
         } else {
             props.handleUpdateOk();
-            dispatch(updateUser(body))
+            dispatch(UserUpdate(body))
                 .then(response => { 
                     if(response.payload.CreateSuccess){ 
                         console.log(response.payload.CreateSuccess);

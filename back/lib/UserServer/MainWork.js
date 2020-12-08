@@ -14,6 +14,7 @@ router.post('/mainworkread', (req, res) => {
       let workTime = 0;
       let workTimeSum = 0;
       works.forEach(work => {
+        //console.log(work);
         //console.log('OnWork: ',work.OnWork);
         //console.log('OnWorkSplit: ',Number(work.OnWork.split(':')[0]));
         //console.log('OffWork: ',work.OffWork);
@@ -22,6 +23,7 @@ router.post('/mainworkread', (req, res) => {
         if(work.OffWork != null){
           workTime = Number(work.OffWork.split(':')[0]) - Number(work.OnWork.split(':')[0]);
           workTimeSum += workTime;
+          //console.log(`시작${i} : `,workTimeSum);
         }else{
           workTime=0;
         }

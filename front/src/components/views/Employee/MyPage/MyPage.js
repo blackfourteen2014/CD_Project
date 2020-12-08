@@ -1,48 +1,53 @@
 import React, { useState, useEffect } from "react";
 import {Layout, Button, Descriptions, Input} from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
-import axios from 'axios';
 import MyPageUpdate from './MyPageUpdate';
 import '../../user.css';
+import {useDispatch} from 'react-redux';
+import {MyPageUserDataRead} from '../../../../_actions/user_action';
 
 // 불러오는 곳
 const { Content } = Layout;
 
 function MyPage() {
+  const dispatch = useDispatch();
   const [User, setUser] = useState(['']);
-  const [Password, setPassword] = useState('');//바꿀비밀번호
-  const [CheckPassword, setCheckPassword] = useState('');//바꿀비밀번호확인
+  const [Password, setPassword] = useState('');//수정할 패스워드 변수
+  const [CheckPassword, setCheckPassword] = useState('');//수정할 패스워드 확인 변수
+  //마이페이지 유저 데이터 Read
+  const MyPageRead = () => {
+    dispatch(MyPageUserDataRead())
+      .then(response => {
+        setUser(response.payload);
+      });
+  }
+  useEffect(() => {
+    MyPageRead();
+  }, []);
+  //팝업
+  const [Visible, setVisible] = useState(false);
 
+  const showModal = () => {
+    setVisible(true);
+  };
+  const handleCancel = () => {
+    setVisible(false);
+    };
+  const handleOk = () => {
+    setVisible(false);
+  }
+  //마이페이지 취소 버튼
+  const handleUpdateCancel = () => {
+    window.location.reload();
+  }
+    //수정할 패스워드
   const handleChangePassword = (e) => {
     setPassword(e.currentTarget.value);
   }
+  //수정할 패스워드 확인
   const handleChangeCheckPassword = (e) => {
     setCheckPassword(e.currentTarget.value);
   }
-  useEffect(() => {
-    //console.log(Password);
-    axios.get('/api/users/mypageread').then(response => {
-      setUser(response.data);
-    });
-    
-  }, []);
-    //팝업
-    const [Visible, setVisible] = useState(false);
-
-    const showModal = () => {
-      setVisible(true);
-    };
-    const handleCancel = () => {
-      setVisible(false);
-     };
-    const handleOk = () => {
-      setVisible(false);
-    }
-    //마이페이지 취소 버튼
-    const handleUpdateCancel = () => {
-      window.location.reload();
-    }
-    
     return(
         <Content className = "mycontent">
           <div id = "mywrap">

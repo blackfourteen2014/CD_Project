@@ -1,8 +1,10 @@
 import React from 'react'
 import { Modal } from 'antd';
-import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {MyPagePasswordUpdate} from '../../../../_actions/user_action';
 
 function MyPageUpdate(props) {
+    const dispatch = useDispatch();
     const handleUpdateOk = () => {
         props.handleOk();
         if(props.Password == props.CheckPassword){
@@ -10,8 +12,8 @@ function MyPageUpdate(props) {
               Password : props.Password,
               id : props.User[0].id
             }
-            axios.post('/api/users/mypagepasswordupdate',body).then(response => {
-                if(response.data.success){
+            dispatch(MyPagePasswordUpdate(body)).then(response => {
+                if(response.payload.success){
                     alert('비밀번호가 변경되었습니다');
                     window.location.reload();
                 }else{

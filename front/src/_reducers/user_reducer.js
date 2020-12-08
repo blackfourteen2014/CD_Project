@@ -1,14 +1,15 @@
 import {
     LOGIN_USER,
-    CREATE_USER,
-    UPDATE_USER,
+    USER_CREATE,
+    USER_UPDATE,
     HOLIDAY_CREATE,
     SMALLCODE_CREATE,
     LARGECODE_CREATE,
     ONWORK_USER,
     OFFWORK_USER,
-    HOLIDAY_USER,
-    MYPAGE_USER,
+    HOLIDAYUSER_CREATE,
+    MYPAGE_CHECK,
+    MYPAGEPASSWORD_UPDATE
 } from '../_actions/types';
 //이전state 값과 action값을 묶어서 store(index.js)로 보냄
 export default function(state= {}, action) {
@@ -16,10 +17,10 @@ export default function(state= {}, action) {
         case LOGIN_USER:
             return { ...state, loginSuccess: action.payload }
 
-        case CREATE_USER:
+        case USER_CREATE:
             return { ...state, CreateSuccess: action.payload }
 
-        case UPDATE_USER:
+        case USER_UPDATE:
             return { ...state, UpdateSuccess: action.payload }
 
         case HOLIDAY_CREATE:
@@ -37,12 +38,13 @@ export default function(state= {}, action) {
         case OFFWORK_USER:
             return { ...state, success: action.payload }
 
-        case HOLIDAY_USER:
+        case HOLIDAYUSER_CREATE:
             return { ...state, success: action.payload }
 
-        case MYPAGE_USER:
+        case MYPAGE_CHECK:
             return { ...state, success: action.payload }
-            
+        case MYPAGEPASSWORD_UPDATE:
+            return { ...state, success: action.payload }
         default:
             return state;
     }

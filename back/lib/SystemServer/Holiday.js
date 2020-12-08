@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../config/db');
 //휴일 데이터 READ
-router.get('/holidayread', (req, res) => {
+router.get('/holidaydataread', (req, res) => {
     db.query('SELECT holi.StartDate,small.SmallInfo FROM holiday AS holi JOIN SmallCode AS small ON small.SmallCode = holi.holimanage;', (error, lists) => {
       if (error) throw error;
       //console.log('holiday date\n', lists);
