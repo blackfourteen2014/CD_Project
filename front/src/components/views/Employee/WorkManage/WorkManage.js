@@ -33,15 +33,13 @@ const { TabPane } = Tabs;
       setVisible(false);
     }
     const [Data, setData] = useState(['']); //업무조회 데이터 변수
-    //업무조회 데이터 Read
-    const WorkManageRead = () => {
+    
+    useEffect(() => {
+      //업무조회 데이터 Read
       dispatch(WorkManageDataRead())
         .then(response=>{
           setData(response.payload);
         });
-    }
-    useEffect(() => {
-      WorkManageRead();
     }, []);
       return (
           <Layout>

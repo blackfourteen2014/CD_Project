@@ -1,23 +1,51 @@
 //받는 액션을 정의
 //로그인
-export const LOGIN_USER = "LOGIN_USER";
-//유저 추가, 등록
-export const USER_CREATE = "USER_CREATE";
-export const USER_UPDATE = "USER_UPDATE";
-//직원, 대표
-export const ONWORK_USER = "ONWORK_USER";
-export const OFFWORK_USER = "OFFWORK_USER";
+    export const LOGIN_USER = "LOGIN_USER";
+//직원, 대표 출퇴근
+    export const ONWORK_USER = "ONWORK_USER";
+    export const OFFWORK_USER = "OFFWORK_USER";
 //직원 화면
-export const USERWORK_READ = "USERWORK_READ";
-export const HOLIDAYUSER_READ = "HOLIDAYUSER_READ";
-export const HOLIDAYUSER_CREATE = "HOLIDAYUSER_CREATE";
-export const WORKMANAGE_READ = "WORKMANAGE_READ";
-export const MYPAGE_READ = "MYPAGE_READ";
-export const MYPAGE_CHECK = "MYPAGE_CHECK";
-export const MYPAGEPASSWORD_UPDATE = "MYPAGEPASSWORD_UPDATE";
+    //메인화면 근무조회
+    export const USERWORK_READ = "USERWORK_READ";
+    //연가페이지
+    export const HOLIDAYUSER_READ = "HOLIDAYUSER_READ";
+    export const HOLIDAYUSER_CREATE = "HOLIDAYUSER_CREATE";
+    //업무지시 및 조회
+    export const WORKMANAGE_READ = "WORKMANAGE_READ";
+    export const WORKMANAGEUSERLIST_READ = "WORKMANAGEUSERLIST_READ";
+    export const WORKMANAGEDATA_SAVE = "WORKMANAGEDATA_SAVE";
+    //마이페이지
+    export const MYPAGE_READ = "MYPAGE_READ";
+    export const MYPAGE_CHECK = "MYPAGE_CHECK";
+    export const MYPAGEPASSWORD_UPDATE = "MYPAGEPASSWORD_UPDATE";
+    //직원근무조회
+    export const EMPLOYEEMANAGEUSERLIST_READ = "EMPLOYEEMANAGEUSERLIST_READ";
+    export const EMPLOYEEMANAGEUSERWORKDEPTCODELIST_READ = "EMPLOYEEMANAGEUSERWORKDEPTCODELIST_READ";
+    export const EMPLOYEEMANAGEUSERMONTHLYLIST_READ = "EMPLOYEEMANAGEUSERMONTHLYLIST_READ";
+    //직원 연가 조회 및 승인
+    export const HOLIDAYPREZUSERLIST_READ = "HOLIDAYPREZUSERLIST_READ";
+    export const HOLIDAYUSERCONFIRM_UPDATE = "HOLIDAYUSERCONFIRM_UPDATE";
 //시스템 화면
-export const HOLIDAY_READ = "HOLIDAY_READ";
-export const HOLIDAY_CREATE = "HOLIDAY_CREATE";
-export const SMALLCODE_CREATE = "SMALLCODE_CREATE";
-export const LARGECODE_CREATE = "LARGECODE_CREATE";
-// export const SMALLCODEUPDATE_INFO = "smallcodeupdate_info";
+    //휴일설정
+    export const HOLIDAY_READ = "HOLIDAY_READ";
+    export const HOLIDAY_CREATE = "HOLIDAY_CREATE";
+    export const HOLIDAY_DELETE = "HOLIDAY_DELETE";
+    //직원관리 조회, 추가, 등록, 삭제
+    export const USER_READ = "USER_READ";
+    export const USER_CREATE = "USER_CREATE";
+    export const USER_UPDATE = "USER_UPDATE";
+    export const USER_DELETE = "USER_DELETE";
+    //소코드
+    export const SMALLCODE_READ = "SMALLCODE_READ";
+    export const SMALLCODE_CREATE = "SMALLCODE_CREATE";
+    export const SMALLCODE_DELETE = "SMALLCODE_DELETE";
+    //대코드
+    export const MASTERCODESEARCHLIST_READ = "MASTERCODESEARCHLIST_READ";
+    export const MASTERCODE_READ = "MASTERCODE_READ";
+    export const MASTERCODE_CREATE = "MASTERCODE_CREATE";
+    export const MASTERCODE_DELETE = "MASTERCODE_DELETE";
+    //코드로 검색
+    export const HOLYCODELIST_READ = "HOLYCODELIST_READ";
+    export const DEPTCODE_SEARCH = "DEPTCODE_SEARCH";
+    export const DEPTCODELIST_READ = "DEPTCODELIST_READ";
+    export const RANKCODELIST_READ = "RANKCODELIST_READ";

@@ -4,7 +4,7 @@ import {
     USER_UPDATE,
     HOLIDAY_CREATE,
     SMALLCODE_CREATE,
-    LARGECODE_CREATE,
+    MASTERCODE_CREATE,
     ONWORK_USER,
     OFFWORK_USER,
     HOLIDAYUSER_CREATE,
@@ -29,7 +29,7 @@ export default function(state= {}, action) {
         case SMALLCODE_CREATE:
             return { ...state, smallcodeSaveSuccess: action.payload }
 
-        case LARGECODE_CREATE:
+        case MASTERCODE_CREATE:
             return { ...state, largecodeSaveSuccess: action.payload }
 
         case ONWORK_USER:

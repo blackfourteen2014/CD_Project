@@ -1,12 +1,13 @@
 import React, {useState,useEffect} from 'react'
 import { Table, Button } from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
-import axios from 'axios';
 import MasterCodeAdd from '../SystemAdd/MasterCodeAdd';
-//import MasterCodeUpdate from '../SystemUpdate/MasterCodeUpdate';
 import {DeCodeColumns} from './ColumnTable'; //ColumnTable 내에 함수 사용
+import {useDispatch} from 'react-redux';
+import {MasterCodeRead, MasterCodeDelete} from '../../_actions/system_action';
 
-function MasterCode(props) {
+function MasterCode() {
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);//칼럼 안 데이터
   const [Visible, setVisible] = useState(false); //modal 관리
   const [CheckTarget, setCheckTarget] = useState([]); //체크 박스 한 대상
@@ -17,14 +18,16 @@ function MasterCode(props) {
       setCheckTarget(selectedRows);
     }
   };
-  //delete
+  //대코드 삭제 버튼
   const handleDelete = () => {
-    axios.post('/api/system/mastercodedelete', CheckTarget).then(res =>{
-     if(res.data.success){
-     alert('삭제되었습니다.');
-     window.location.reload();
-      }
-    })
+    //대코드 데이터 Delete
+    dispatch(MasterCodeDelete(CheckTarget))
+      .then(response=>{
+        if(response.payload.success){
+           alert('삭제되었습니다.');
+           window.location.reload();
+        }
+      });
   }
     ///ManageAdd 분리//////////////////////////
   //팝업 창 ON
@@ -39,14 +42,15 @@ function MasterCode(props) {
   const handleOk = () =>{
     setVisible(false);
   }
-  //공통 코드 데이터 조회
+
   useEffect(() => {
-    axios.get('/api/system/mastercoderead').then(response => {
-      setData(response.data);
-      console.log(response.data);
-    });
-}, []);
-    //main
+    //대코드 데이터 Read
+    dispatch(MasterCodeRead())
+      .then(response=>{
+        setData(response.payload);
+      });
+  }, []);
+
   return (
     <div>
       <div style = {{background: '#fff',minHeight: 32}}></div> 
@@ -54,8 +58,6 @@ function MasterCode(props) {
         <Button onClick={showModal}>추가</Button>   
         <MasterCodeAdd Visible={Visible} handleCancel={handleCancel} handleOk={handleOk} />
         <Button onClick={handleDelete}>삭제</Button>
-        {/* <Button onClick={handleSave}>수정</Button>   
-        <MasterCodeUpdate Visible={Visible} handleCancel={handleCancel} handleOk={handleOk}  /> */}
       </div>
         <Table style = {{background: '#fff'}} columns={DeCodeColumns} dataSource={data} rowSelection={rowSelection} size="middle" />
     </div>

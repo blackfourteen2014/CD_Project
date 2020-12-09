@@ -1,8 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import { Modal, Select,Input } from 'antd';
 import { useDispatch } from 'react-redux';
-import { SmallCodeCreate } from '../../_actions/system_action';
-import axios from 'axios';
+import { SmallCodeCreate, MasterCodeRead } from '../../_actions/system_action';
 
 const { Option } = Select;
 
@@ -32,11 +31,13 @@ function CodeAdd(props){
 
   //대코드 종류 설정
   const [data, setData] = useState([]);
-  useEffect(() => {         
-    axios.get('/api/system/mastercoderead').then(response => {
-      setData(response.data);
-    });
-    }, []);
+  useEffect(() => { 
+    //대코드 데이터 Read        
+    dispatch(MasterCodeRead())
+      .then(response=>{
+        setData(response.payload);
+      });
+  }, []);
   
 //팝업 저장(유저 생성)
   const handleOk = () => {

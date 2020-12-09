@@ -14,15 +14,13 @@ function MyPage() {
   const [User, setUser] = useState(['']);
   const [Password, setPassword] = useState('');//수정할 패스워드 변수
   const [CheckPassword, setCheckPassword] = useState('');//수정할 패스워드 확인 변수
-  //마이페이지 유저 데이터 Read
-  const MyPageRead = () => {
+  
+  useEffect(() => {
+    //마이페이지 유저 데이터 Read
     dispatch(MyPageUserDataRead())
       .then(response => {
         setUser(response.payload);
       });
-  }
-  useEffect(() => {
-    MyPageRead();
   }, []);
   //팝업
   const [Visible, setVisible] = useState(false);
