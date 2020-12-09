@@ -29,7 +29,7 @@ function WorkManageSend() {
           let body = {
             SmallInfo : value
           }
-          //시스템 관리자에 있는 덱 코드 리스트 가져다 쓴 것(수정해야함)
+          //부서코드로 검색
           axios.post('/api/deptCodelist',body).then(response => {  
             setUserList(response.data);
           });
@@ -62,7 +62,7 @@ function WorkManageSend() {
       }
       //이제 보내서 저장하고 해당 유저는 있으면 보여줌.
       axios.post('/api/workmanagesave',body).then(response => {
-          console.log(response.data);
+          //console.log(response.data);
           if(response.data){
             alert('성공적으로 보냈습니다.');
             window.location.reload();
@@ -96,10 +96,6 @@ function WorkManageSend() {
     const [UserList, setUserList] = useState([]); //직원 리스트
     //데이터 GET
     useEffect(() => {
-        // axios.get('/api/workmanageuserlist').then(response => {
-        //     //console.log(response.data);
-        //     setUserList(response.data);
-        // });
         axios.get('/api/deptlist').then(response => {
             setDeptList(response.data);
           });

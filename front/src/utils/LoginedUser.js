@@ -9,7 +9,7 @@ function LoginedUser(){
 const [userName, setuserName] = useState(''); //로그인 시 이름 보임
 //로그인 시 이름 보임
 useEffect(() => {
-  axios.get('/api/userInfo').then(res => {
+  axios.get('/api/users/userdataread').then(res => {
     //console.log(res.data);
     setuserName(res.data.userName);
   });

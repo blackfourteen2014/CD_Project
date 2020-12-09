@@ -19,7 +19,7 @@ function Manage(props) {
   //dispatch로 가져오도록 바꿀 예정====================================
   //직원 데이터 조회
   useEffect(() => {
-    axios.get('/api/users/read').then(response => {
+    axios.get('/api/system/read').then(response => {
       setData(response.data);
     });
     axios.get('/api/deptlist').then(response => {
@@ -28,7 +28,7 @@ function Manage(props) {
 }, []);
   //직원 데이터 삭제
   const handleDelete = () => {
-    axios.post('/api/users/delete', CheckTarget).then(res =>{
+    axios.post('/api/system/delete', CheckTarget).then(res =>{
       if(res.data.success){
         alert('삭제되었습니다.');
         window.location.reload();
@@ -63,12 +63,12 @@ function Manage(props) {
   //근무부서 선택
   function onChange(value) {
     if(value === 'All'){
-      axios.get('/api//users/read').then(response => {  
+      axios.get('/api/system/read').then(response => {  
         setData(response.data);
       });
-      console.log(value);
+      //console.log(value);
     }else{
-      console.log(value);
+      //console.log(value);
       let body = {
         SmallInfo : value
       }
@@ -109,15 +109,6 @@ function Manage(props) {
             style={{background: '#fff'}}
           />
           <Content>
-          {/* <Breadcrumb style = {{background: '#fff', minHeight: 100}}>
-              <Breadcrumb.Item>
-                <PageHeader
-                  className="site-page-header"
-                  title="직원관리"
-                  subTitle="직원관리 페이지">   
-                </PageHeader>
-              </Breadcrumb.Item>
-            </Breadcrumb> */}
             {/* 부서선택 */}
             <div style = {{fontSize: 20,background: '#fff', minHeight: 2}}>
               <Select showSearch style={{ width: 200 }} placeholder="근무부서 검색"

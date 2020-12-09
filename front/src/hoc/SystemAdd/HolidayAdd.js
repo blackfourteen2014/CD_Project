@@ -3,7 +3,7 @@ import { Select, Modal, Alert, Input} from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { holidayInfo } from '../../_actions/system_action';
+import { HolidayCreate } from '../../_actions/system_action';
 import moment from 'moment'
 
 const { Option } = Select;
@@ -41,7 +41,7 @@ function HolidayAdd(props) {
         SaveCode, //소코드
         HoliContent, //비고
       }
-      dispatch(holidayInfo(body))
+      dispatch(HolidayCreate(body))
               .then(response => { 
                   if(response.payload.holidaySaveSuccess){ 
                     alert('Success!',);

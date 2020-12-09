@@ -1,17 +1,23 @@
 //받는 액션을 정의
 //로그인
-export const LOGIN_USER = "login_user";
+export const LOGIN_USER = "LOGIN_USER";
 //유저 추가, 등록
-export const CREATE_USER = "create_user";
-export const UPDATE_USER = "update_user";
+export const USER_CREATE = "USER_CREATE";
+export const USER_UPDATE = "USER_UPDATE";
 //직원, 대표
-export const ONWORK_USER = "onwork_user";
-export const OFFWORK_USER = "offwork_user";
+export const ONWORK_USER = "ONWORK_USER";
+export const OFFWORK_USER = "OFFWORK_USER";
 //직원 화면
-export const HOLIDAY_USER = "holiday_user";
-export const MYPAGE_USER = "mypage_user";
+export const USERWORK_READ = "USERWORK_READ";
+export const HOLIDAYUSER_READ = "HOLIDAYUSER_READ";
+export const HOLIDAYUSER_CREATE = "HOLIDAYUSER_CREATE";
+export const WORKMANAGE_READ = "WORKMANAGE_READ";
+export const MYPAGE_READ = "MYPAGE_READ";
+export const MYPAGE_CHECK = "MYPAGE_CHECK";
+export const MYPAGEPASSWORD_UPDATE = "MYPAGEPASSWORD_UPDATE";
 //시스템 화면
-export const HOLIDAY_INFO = "holiday_info";
-export const SMALLCODE_INFO = "SmallCode_info";
-export const LARGECODE_INFO = "LargeCode_info";
+export const HOLIDAY_READ = "HOLIDAY_READ";
+export const HOLIDAY_CREATE = "HOLIDAY_CREATE";
+export const SMALLCODE_CREATE = "SMALLCODE_CREATE";
+export const LARGECODE_CREATE = "LARGECODE_CREATE";
 // export const SMALLCODEUPDATE_INFO = "smallcodeupdate_info";

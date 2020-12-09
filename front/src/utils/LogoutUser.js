@@ -5,7 +5,7 @@ import 'antd/dist/antd.css'; //antd디자인 CSS
 //로그아웃 버튼 및 로그아웃 기능
 function LogoutUser(props){
     const handleLogout =  () => {
-        axios.get('/api/users/logout').then(response => { 
+        axios.get('/api/logout').then(response => { 
         //console.log(response.data);
         if(response.data.logoutSuccess){ 
             //console.log(props.pageChange);

@@ -1,7 +1,7 @@
 import React,{ useState,useEffect } from 'react';
 import { Modal, Select,Input } from 'antd';
 import { useDispatch } from 'react-redux';
-import { createUser } from '../../_actions/user_action';
+import { UserCreate } from '../../_actions/system_action';
 import axios from 'axios';
 
 const { Option } = Select;
@@ -68,7 +68,7 @@ function ManageAdd(props){
       rank:Rank
     }
 
-    dispatch(createUser(body))
+    dispatch(UserCreate(body))
             .then(response => { 
                 if(response.payload.CreateSuccess){ 
                   console.log(response.payload.CreateSuccess);

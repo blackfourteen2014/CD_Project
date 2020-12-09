@@ -1,36 +1,48 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
 import { Layout, Button, Table, PageHeader} from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
-import axios from 'axios';
-import LoginedUser from '../../../../utils/LoginedUser';///utils 폴더
-import LogoutUser from '../../../../utils/LogoutUser';
-import SideBar from '../../../../utils/SideBarEmployee';///여기까지
+import LoginedUser from '../../../../utils/LoginedUser';//로그인 시
+import LogoutUser from '../../../../utils/LogoutUser';//로그아웃 시
+import SideBar from '../../../../utils/SideBarEmployee';//사이드바
 import {HolidayColums} from './HolidayUserColums'; //연가조회칼럼
 import HolidayUserAdd from './HolidayUserAdd';//연가신청 버튼의 기능
-import { Calendar, momentLocalizer } from 'react-big-calendar' //캘린더============
-import moment from 'moment'
-import 'react-big-calendar/lib/sass/styles.scss';
-import 'react-big-calendar/lib/addons/dragAndDrop/styles.scss';
-import './Calendar.scss' //scss 재정의=============================================
-import '../../user.css';
+import { Calendar, momentLocalizer } from 'react-big-calendar'; //빅캘린더
+import moment from 'moment'; //날짜 및 시간 데이터
+import 'react-big-calendar/lib/sass/styles.scss'; //빅캘린더 스타일
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.scss'; //빅캘린더 스타일2
+import './Calendar.scss'; //캘린더 scss 재정의
+import '../../user.css'; //css
+import {CustomToolbar} from '../../../../utils/CustomToolbar'; //캘린더 툴바 커스텀
+import { useDispatch } from 'react-redux';
+import {HolidayDataRead} from '../../../../_actions/system_action'; //휴일 function
+import {HolidayUserDataRead} from '../../../../_actions/user_action';//연가 function
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const localizer = momentLocalizer(moment)
 
 function HolidayUser(props) {
-  const [HolidayUserData, setHolidayUserData] = useState(''); //연가 정보
-  const [ListData, setListData] = useState([]); //휴일 정보
-
+  const dispatch = useDispatch();
+  const [HolidayUserData, setHolidayUserData] = useState(['']); //연가 정보
+  const [ListData, setListData] = useState(['']); //휴일 정보
+  //휴일 데이터 Read
+  const HolidayRead = () => {
+    dispatch(HolidayDataRead())
+            .then(response => {
+              setListData(response.payload);
+            }
+    );
+  } 
+  //유저 연가 데이터 Read
+  const HolidayUserRead = () => {
+    dispatch(HolidayUserDataRead())
+            .then(response => {
+              setHolidayUserData(response.payload);
+            }
+    );
+  }
   useEffect(() => {         
-    //휴일 데이터를 가져옴
-    axios.get('/api/holidaydataread').then(response => {
-      //console.log(response.data);
-      setListData(response.data);
-    });
-    //HolidayUser
-    axios.get('/api/holidayuserlist').then(response => {
-      setHolidayUserData(response.data);
-    });
+    HolidayRead();
+    HolidayUserRead();
 }, []);
   //캘린더====================================================================================
   const [Visible, setVisible] = useState(false);
@@ -46,45 +58,6 @@ function HolidayUser(props) {
   const handleOk = () => {
     setVisible(false);
   }
-  //커스텀 툴바
-  const CustomToolbar = (toolbar) => {
-    //이전 달 버튼 이벤트
-    const goToBack = () => {
-      toolbar.date.setMonth(toolbar.date.getMonth() - 1);
-      toolbar.onNavigate('prev');
-    };
-    //다음 달 버튼 이벤트
-    const goToNext = () => {
-      toolbar.date.setMonth(toolbar.date.getMonth() + 1);
-      toolbar.onNavigate('next');
-    };
-    // Today버튼 이벤트
-    const goToCurrent = () => {
-      const now = new Date();
-      toolbar.date.setMonth(now.getMonth());
-      toolbar.date.setYear(now.getFullYear());
-      toolbar.onNavigate('current');
-    };
-    //label ex)11 2020
-    const label = () => {
-      const date = moment(toolbar.date);
-      return (
-        <span><b>{date.format('MM')}</b><span style={{fontSize:'20px'}}> {date.format('YYYY')}</span></span>
-      );
-    };
-  
-    return (
-      <div className={Calendar['toolbar-container']}>
-        <label className={Calendar['label-date']} style={{fontSize:'30px'}}>{label()}</label>
-  
-        <div className={Calendar['back-next-buttons']}>
-          <Button className={Calendar['btn-back']} onClick={goToBack}>&#8249;</Button>
-          <Button className={Calendar['btn-current']} onClick={goToCurrent}>Today</Button>
-          <Button className={Calendar['btn-next']} onClick={goToNext}>&#8250;</Button>
-        </div>
-      </div >
-    );
-  };
   //===========================================================================================================
     return(
         <div>

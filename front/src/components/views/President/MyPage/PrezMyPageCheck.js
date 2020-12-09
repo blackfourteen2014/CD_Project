@@ -5,7 +5,7 @@ import SideBar from '../../../../utils/SideBarPresident';
 import LoginedUser from '../../../../utils/LoginedUser';
 import LogoutUser from '../../../../utils/LogoutUser';
 import { useDispatch } from 'react-redux';
-import { myPageUser } from '../../../../_actions/user_action';
+import { MyPagePasswordCheck } from '../../../../_actions/user_action';
 import MyPage from '../../Employee/MyPage/MyPage';
 
 const { Header, Content } = Layout;
@@ -26,7 +26,7 @@ function PrezCheckMyPage(props) {
             Password
         }
 
-        dispatch(myPageUser(body))
+        dispatch(MyPagePasswordCheck(body))
             .then(response => { 
                 if(response.payload.success){
                     console.log(response.payload.success);

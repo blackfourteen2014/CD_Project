@@ -5,7 +5,7 @@ import SideBar from '../../../../utils/SideBarEmployee';
 import LoginedUser from '../../../../utils/LoginedUser';
 import LogoutUser from '../../../../utils/LogoutUser';
 import { useDispatch } from 'react-redux';
-import { myPageUser } from '../../../../_actions/user_action';
+import { MyPagePasswordCheck } from '../../../../_actions/user_action';
 import MyPage from './MyPage';
 import '../../user.css';
 
@@ -21,16 +21,15 @@ function MyPageCheck(props) {
       }
 
     const handleCheck = () => {
-        console.log("Check");
-
+        //console.log("Check");
         let body = {
             Password
         }
 
-        dispatch(myPageUser(body))
+        dispatch(MyPagePasswordCheck(body))
             .then(response => { 
                 if(response.payload.success){
-                    console.log(response.payload.success);
+                    //console.log(response.payload.success);
                     setMypageShow(true);
                 }
                 else {

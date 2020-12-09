@@ -65,7 +65,7 @@ router.post('/login', (req, res) => { //request부분에 front에서 넘어온 �
         } 
       });
     }
-    
   });
+
 
 module.exports = router;
