@@ -1,56 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { Layout, Table, Tabs, PageHeader } from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
-import axios from 'axios';
 import LoginedUser from '../../../../utils/LoginedUser';
 import LogoutUser from '../../../../utils/LogoutUser';
 import SideBar from '../../../../utils/SideBarPresident';
 import { workManageColumn } from '../../Employee/WorkManage/WorkManageColumns'; //업무 칼럼
 import WorkManageSend from '../../Employee/WorkManage/WorkManageSend'; //업무지시 페이지
 import WorkManageInfo from '../../Employee/WorkManage/WorkManageInfo';
+import {useDispatch} from 'react-redux';
+import {WorkManageDataRead} from '../../../../_actions/user_action';
 
-const { Header } = Layout; //Layout부분을  Header , Content ,Sider, Footer로 나눠서 사용한다.
 const { TabPane } = Tabs;
 
 function PrezWorkManage(props){
-  const [SendShow, setSendShow] = useState(false); //스위치버튼
+  const dispatch = useDispatch();
+  //업무 상세보기
+  const [Visible, setVisible] = useState(false);
+  const [UserData, setUserData] = useState(['']);
 
-    //업무조회 페이지로
-    const handleListShow = (e) => {
-      //console.log(e);
-      setSendShow(false);
-    }
-    //업무지시 페이지로
-    const handleSendShow = (e) => {
-      console.log(e);
-      setSendShow(true);
-    }
-    //업무 상세보기
-    const [Visible, setVisible] = useState(false);
-    const [UserData, setUserData] = useState(['']);
+  const handleInformation = (value) => {
+    setUserData(value);
+    setVisible(true);
+  }
 
-    const handleInformation = (value) => {
-      //console.log(value);
-      setUserData(value);
-      setVisible(true);
-    }
+  const handleOk = () => {
+    setVisible(false);
+  }
 
-    const handleOk = () => {
-      setVisible(false);
-    }
+  const handleCancel = () => {
+    setVisible(false);
+  }
+  //업무 조회 데이터 가져오기
+  const [Data, setData] = useState(['']);
 
-    const handleCancel = () => {
-      setVisible(false);
-    }
-    //업무 조회 데이터 가져오기
-    const [Data, setData] = useState(['']);
-
-    useEffect(() => {
-      axios.get('/api/workmanageread').then(response => {
-        console.log(response.data);
-        setData(response.data);
-      }); 
-    }, []);
+  useEffect(() => {
+    //업무조회 데이터 Read
+    dispatch(WorkManageDataRead())
+      .then(response=>{
+        setData(response.payload);
+      });
+  }, []);
 
     return(
         <Layout>

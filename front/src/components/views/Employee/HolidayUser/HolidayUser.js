@@ -24,25 +24,18 @@ function HolidayUser(props) {
   const dispatch = useDispatch();
   const [HolidayUserData, setHolidayUserData] = useState(['']); //연가 정보
   const [ListData, setListData] = useState(['']); //휴일 정보
-  //휴일 데이터 Read
-  const HolidayRead = () => {
+  
+  useEffect(() => {    
+    //휴일 데이터 Read 
     dispatch(HolidayDataRead())
-            .then(response => {
-              setListData(response.payload);
-            }
-    );
-  } 
-  //유저 연가 데이터 Read
-  const HolidayUserRead = () => {
+      .then(response => {
+        setListData(response.payload);
+      });   
+    //유저 연가 데이터 Read 
     dispatch(HolidayUserDataRead())
-            .then(response => {
-              setHolidayUserData(response.payload);
-            }
-    );
-  }
-  useEffect(() => {         
-    HolidayRead();
-    HolidayUserRead();
+      .then(response => {
+        setHolidayUserData(response.payload);
+      });
 }, []);
   //캘린더====================================================================================
   const [Visible, setVisible] = useState(false);

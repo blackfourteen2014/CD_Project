@@ -3,19 +3,6 @@ const db   = require('./config/db'); //자신의 데이터베이스 정보(유�
 const app = express(); //funtion을 이용하여 새로운 express app을 만듬
 const port = 5000 //port number
 const bodyParser = require('body-parser');
-//router
-//all
-const LoginRouter = require('./lib/LoginSystem'); //로그인, 로그아웃
-//user
-const MypageRouter = require('./lib/UserServer/Mypage'); //유저 마이페이지 기능
-const OnOffWorkRouter = require('./lib/UserServer/OnOffWork'); //유저 출퇴근 기능
-const UserControllerRouter = require('./lib/UserServer/UserController'); //유저 기능과 관련된 전반적인 제어장치
-const MainWorkRouter = require('./lib/UserServer/MainWork'); //유저 메인화면 근무조회 기능
-const HolidayUser = require('./lib/UserServer/HolidayUser'); //유저 연가 기능
-//system
-const UserRouter = require('./lib/SystemServer/User'); //직원 추가,읽기,삭제,수정
-const CodeRouter = require('./lib/SystemServer/Code');
-const HolidayRouter = require('./lib/SystemServer/Holiday');
 //웹에서 application/x-www-form-urlencoded에 있는 데이터를 분석해서 가져옴
 app.use(bodyParser.urlencoded({extended : true}));
 //웹에서 application/json에 있는 데이터를 분석해서 가져옴
@@ -32,18 +19,36 @@ app.use(session({
   store:new mysqlStore(sessionDB)
 }));
 //기능의 복잡성을 해소하기 위한 라우터 사용
-//all
-app.use('/api', LoginRouter); //로그인
-//user
-app.use('/api/users', UserControllerRouter);
-app.use('/api/users', MypageRouter);
-app.use('/api/users', OnOffWorkRouter);
-app.use('/api/users', MainWorkRouter);
-app.use('/api/users', HolidayUser);
-//system
-app.use('/api/system', UserRouter);
-app.use('/api/system', CodeRouter);
-app.use('/api/system', HolidayRouter);
+//router
+  //require
+    //all
+    const LoginRouter = require('./lib/LoginSystem'); //로그인, 로그아웃
+    //user
+    const MypageRouter = require('./lib/UserServer/Mypage'); //유저 마이페이지 기능
+    const OnOffWorkRouter = require('./lib/UserServer/OnOffWork'); //유저 출퇴근 기능
+    const UserControllerRouter = require('./lib/UserServer/UserController'); //유저 기능과 관련된 전반적인 제어장치
+    const MainWorkRouter = require('./lib/UserServer/MainWork'); //유저 메인화면 근무조회 기능
+    const HolidayUser = require('./lib/UserServer/HolidayUser'); //유저 연가 기능
+    //system
+    const UserRouter = require('./lib/SystemServer/User'); //직원 추가,읽기,삭제,수정
+    const CodeRouter = require('./lib/SystemServer/Code');
+    const HolidayRouter = require('./lib/SystemServer/Holiday');
+  //
+  //use
+    //all
+    app.use('/api', LoginRouter); //로그인
+    //user
+    app.use('/api/users', UserControllerRouter);
+    app.use('/api/users', MypageRouter);
+    app.use('/api/users', OnOffWorkRouter);
+    app.use('/api/users', MainWorkRouter);
+    app.use('/api/users', HolidayUser);
+    //system
+    app.use('/api/system', UserRouter);
+    app.use('/api/system', CodeRouter);
+    app.use('/api/system', HolidayRouter);
+  //
+//
 //SystemServer로 옮길 예정================================================================================================
 //근무부서 리스트 검색
 app.post('/api/deptcodelist', (req,res) => {
@@ -73,8 +78,8 @@ app.post('/api/deptcodelist', (req,res) => {
   });
 });
 //직원근무조회 근무부서 리스트 검색
-app.post('/api/employeeworkdeptcodelist', (req,res) => {
-  console.log(req.body);
+app.post('/api/employeeworkdeptcodelistread', (req,res) => {
+  //console.log(req.body);
   let sendData = []; 
   let data = {}; 
   let key = 0; 
@@ -106,8 +111,8 @@ app.post('/api/employeeworkdeptcodelist', (req,res) => {
     res.send(sendData);
   });
 });
-//휴일종류코드리스트
-app.get('/api/holylist', (req,res) => {
+//휴일종류코드리스트 Read
+app.get('/api/holycodelistread', (req,res) => {
   db.query('SELECT * from MasterCode where LargeInfo like ?',['%휴일%'],(error,data)=>{
     if(error) throw error;
     //console.log(data[0]);
@@ -251,7 +256,7 @@ app.post('/api/employeemanageuserlist',(req,res)=>{
     });
 });
 //직원 월별 근무 조회 GET
-app.post('/api/employeemanageusermonthlylist',(req,res)=>{
+app.post('/api/employeemanageusermonthlylistread',(req,res)=>{
   //console.log(req.body);
   //console.log(req.body.CurrentDate.split('/')[0]);
   //console.log(req.body.CurrentDate.split('/')[1]);
@@ -293,7 +298,7 @@ app.post('/api/employeemanageusermonthlylist',(req,res)=>{
   });
 });
 //대표 유저 연가 조회
-app.get('/api/holidayprezuserlist', (req, res) => {
+app.get('/api/holidayprezuserlistread', (req, res) => {
   db.query('SELECT * from HolidayUser ORDER BY confirmYN DESC', (error, lists) => {
     if (error) throw error;
     let temp = [];

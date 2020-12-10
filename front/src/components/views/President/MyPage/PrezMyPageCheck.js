@@ -25,7 +25,7 @@ function PrezCheckMyPage(props) {
         let body = {
             Password
         }
-
+        //마이페이지 PasswordCheck
         dispatch(MyPagePasswordCheck(body))
             .then(response => { 
                 if(response.payload.success){

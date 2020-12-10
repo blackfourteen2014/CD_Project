@@ -25,7 +25,7 @@ function MyPageCheck(props) {
         let body = {
             Password
         }
-
+        //마이페이지 현재 비밀번호 Check
         dispatch(MyPagePasswordCheck(body))
             .then(response => { 
                 if(response.payload.success){

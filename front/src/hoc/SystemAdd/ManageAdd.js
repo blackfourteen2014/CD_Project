@@ -67,7 +67,7 @@ function ManageAdd(props){
       dept:Dept,
       rank:Rank
     }
-
+    //유저 데이터 Create
     dispatch(UserCreate(body))
             .then(response => { 
                 if(response.payload.CreateSuccess){ 

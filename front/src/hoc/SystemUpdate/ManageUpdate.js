@@ -1,8 +1,7 @@
 import React,{ useState,useEffect } from 'react';
 import { Modal, Select,Input } from 'antd';
 import { useDispatch } from 'react-redux';
-import { UserUpdate } from '../../_actions/system_action';
-import axios from 'axios';
+import { UserUpdate, DeptCodeListRead, RankCodeListRead } from '../../_actions/system_action';
 
 const { Option } = Select;
 
@@ -67,6 +66,7 @@ function ManageUpdate(props) {
             alert('비밀번호를 입력해주세요.');
         } else {
             props.handleUpdateOk();
+            //유저 데이터 Update
             dispatch(UserUpdate(body))
                 .then(response => { 
                     if(response.payload.CreateSuccess){ 
@@ -85,12 +85,16 @@ function ManageUpdate(props) {
     const [RankList, setRankList] = useState(['']);
 
     useEffect(() => {
-        axios.get('/api/deptlist').then(response => {
-            setDeptList(response.data);
-        });
-        axios.get('/api/ranklist').then(response => {
-            setRankList(response.data);
-        });
+        //부서코드 리스트 Read
+        dispatch(DeptCodeListRead())
+            .then(response=>{
+                setDeptList(response.payload);
+            });
+        //직급코드 리스트 Read 
+        dispatch(RankCodeListRead())
+            .then(response=>{
+                setRankList(response.payload);
+            });
     }, []);
     return (
         <>

@@ -20,18 +20,18 @@ router.post('/create',(req, res) =>{
   });
 //직원 관리 데이터 삭제
 router.post('/delete',(req,res)=>{
-    req.body.forEach(user => {
-      //console.log(user.id);
-      db.query(`DELETE FROM employee WHERE id = ?`,[user.id],function(error,result){
-        if(error){
-          throw error;
-        }
-      });
-    });
-    return res.json({
-      success : true
+  req.body.forEach(user => {
+    //console.log(user.id);
+    db.query(`DELETE FROM employee WHERE id = ?`,[user.id],function(error,result){
+      if(error){
+        throw error;
+      }
     });
   });
+  return res.json({
+    success : true
+  });
+});
 //직원 관리 데이터 표시
 router.get('/read', (req, res) => {
     db.query('SELECT * from employee', (error, users) => {

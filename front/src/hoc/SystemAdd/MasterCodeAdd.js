@@ -24,7 +24,7 @@ function MasterCodeAdd(props){
       LargeCode:LargeCode,
       LargeInfo:LargeInfo,
     }
-
+    //대코드 데이터 Create
     dispatch(MasterCodeCreate(body))
             .then(response => { 
                 if(response.payload.largecodeSaveSuccess){ 
