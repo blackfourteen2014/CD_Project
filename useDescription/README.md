@@ -5,7 +5,7 @@
 - UI-Design : Ant Design
 - Back-End : Nodejs
 - Nodejs-FrameWork : Express
-- DataBase : MySQL(server 5.7)
+- DataBase : MySQL(server5.7)
 - 소스 관리 및 공유 : Git, GitHub
 
 # 사용 설명
@@ -39,59 +39,13 @@ cd front -> npm run start
 
 - (front)
 
-<img src='./images/front_description.PNG'  style="float: left;" hspace='5px' width='170px'> 
-
-```
-
-
-
-
-=> _actions : 액션이 일어날 때 axios로 서버에 보낼 주소를 관리
-=> _reducers : redux를 사용해 state값을 관리(좀 더 연습 필요)
-=> components\views : 로그인, 직원, 대표에서 쓰는 페이지를 모아놈
-
-
-
-
-=> hoc : 시스템관리자에서 쓰는 페이지를 모아놈
-=> utils : 여러 곳에서 사용되는 컴포넌트를 모아놈
-
-=> App.js : 페이지 주소를 관리하는 곳
-
-
-
-
-
-=> setupProxy.js : 서버로 보낼 때 해당 주소로 변환하여 보냄
-
-
-
-
-
-
-
-```
+![GitHub Img](./images/front_description.PNG)
+<!-- <img src='./images/front_description.PNG'>  -->
 
 - (back)
 
-<img src='./images/back_description.PNG'  style="float: left;" hspace='5px'> 
-
-```
-=> config : db 연결과 관련된 파일들
-
-
-
-
-
-
-=> lib : 시스템과 유저, 로그인 기능들을 모아놓음
-
-
-
-
-
-=> index.js : 필요한 모듈 및 lib에 있는 기능들로 정확하게 도달 될 수 있도록 해줌(router)
-```
+![GitHub Img](./images/back_description.PNG)
+<!-- <img src='./images/back_description.PNG'>  -->
 
 # 사용하며 알아두면 좋은 것
 - React_Hook(참고 : https://ko.reactjs.org/docs/hooks-intro.html)
