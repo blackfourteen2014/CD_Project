@@ -39,12 +39,12 @@ cd front -> npm run start
 
 - (front)
 
-![GitHub Img](./images/front_description.PNG)
+![GitHub Img](./images/front_descriptionImg.PNG)
 <!-- <img src='./images/front_description.PNG'>  -->
 
 - (back)
 
-![GitHub Img](./images/back_description.PNG)
+![GitHub Img](./images/back_descriptionImg.PNG)
 <!-- <img src='./images/back_description.PNG'>  -->
 
 # 사용하며 알아두면 좋은 것
