@@ -43,6 +43,8 @@ function LoginPage(props) {
                         props.history.push('/main'); //로그인에 성공하면 메인페이지로
                    }else if(response.payload.grant === 'president'){
                         props.history.push('/prezmain')
+                   }else{
+                       alert('Error');
                    }
                 }
                 else {

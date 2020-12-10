@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Button, Table, Select, Input, Modal, DatePicker } from 'antd';
 import { deptColums } from './WorkManageColumns';
-import axios from 'axios';
 import moment from 'moment';
 import '../../user.css';
+import {useDispatch} from 'react-redux';
+import {WorkManageUserListRead, WorkManageDataSave} from '../../../../_actions/user_action';
+import {DeptCodeSearch, DeptCodeListRead}  from '../../../../_actions/system_action';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 function WorkManageSend() {
+    const dispatch = useDispatch();
     const [CheckTarget, setCheckTarget] = useState(['']); //선택한 유저 값
     //const [data, setData] = useState([]);//직원들 부서검색
     const [DeptList, setDeptList] = useState(['']); //부서검색
@@ -19,20 +22,22 @@ function WorkManageSend() {
           setCheckTarget(selectedRows);
         }
     };
-    //업무지시 부서선택
+    //업무지시 부서검색
     function onSelectChange(value) {
         if(value == 'All'){
-          axios.get('/api/workmanageuserlist').then(response => {  
-            setUserList(response.data);
-          });
+            dispatch(WorkManageUserListRead())
+                .then(response=>{
+                    setUserList(response.payload);
+                });
         }else{
           let body = {
             SmallInfo : value
           }
-          //시스템 관리자에 있는 덱 코드 리스트 가져다 쓴 것(수정해야함)
-          axios.post('/api/deptCodelist',body).then(response => {  
-            setUserList(response.data);
-          });
+        //부서코드로 검색
+        dispatch(DeptCodeSearch(body))
+                .then(response=>{
+                    setUserList(response.payload);
+                });
         }
       }
     //모달창 변수
@@ -47,29 +52,29 @@ function WorkManageSend() {
      };
     //팝업 OFF, 데이터 보내기
     const handleOk = () => {
-      setVisible(false);
-      console.log('선택한 유저 :',CheckTarget);
-      console.log('날짜 :',CurrentTime[0]);
-      console.log('종료날짜 :', EndDate);
-      console.log('제목 :',Title);
-      console.log('내용 :',Des);
-      let body = {
-          checkUsers : CheckTarget,
-          CurrentTime: CurrentTime[0],
-          EndDate,
-          Title,
-          Des
-      }
-      //이제 보내서 저장하고 해당 유저는 있으면 보여줌.
-      axios.post('/api/workmanagesave',body).then(response => {
-          console.log(response.data);
-          if(response.data){
-            alert('성공적으로 보냈습니다.');
-            window.location.reload();
-          } else {
-            alert('Error');
-          }
-      });
+        setVisible(false);
+        console.log('선택한 유저 :',CheckTarget);
+        console.log('날짜 :',CurrentTime[0]);
+        console.log('종료날짜 :', EndDate);
+        console.log('제목 :',Title);
+        console.log('내용 :',Des);
+        let body = {
+            checkUsers : CheckTarget,
+            CurrentTime: CurrentTime[0],
+            EndDate,
+            Title,
+            Des
+        }
+        //업무지시로 보낸 메세지 Save(저장)
+        dispatch(WorkManageDataSave(body))
+                .then(response=>{
+                    if(response.payload){
+                        alert('성공적으로 보냈습니다.');
+                        window.location.reload();
+                        } else {
+                        alert('Error');
+                        }
+                });
     }
     //날짜 데이터 가져오기
     const CurrentTime = useState(moment().format('YYYY/MM/DD')); //현재 날짜
@@ -94,15 +99,12 @@ function WorkManageSend() {
     }
     // 직원 리스트 출력
     const [UserList, setUserList] = useState([]); //직원 리스트
-    //데이터 GET
     useEffect(() => {
-        // axios.get('/api/workmanageuserlist').then(response => {
-        //     //console.log(response.data);
-        //     setUserList(response.data);
-        // });
-        axios.get('/api/deptlist').then(response => {
-            setDeptList(response.data);
-          });
+        //부서리스트 Read
+        dispatch(DeptCodeListRead())
+                .then(response=>{
+                    setDeptList(response.payload);
+                });
     }, [])
 
     return (

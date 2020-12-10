@@ -7,7 +7,7 @@ import SideBar from '../../../../utils/SideBarEmployee';///여기까지
 import MainWork from './MainWork'; //근무조회
 import '../../user.css';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 function MainPage(props) {
   return (

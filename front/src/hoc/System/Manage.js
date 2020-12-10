@@ -1,43 +1,53 @@
 import React, {useState,useEffect} from 'react'
-import { Select, Layout, PageHeader,Table, Button, Breadcrumb } from 'antd';
-  import 'antd/dist/antd.css'; //antd디자인 CSS
-import axios from 'axios';
+import { Select, Layout, PageHeader,Table, Button } from 'antd';
+import 'antd/dist/antd.css'; //antd디자인 CSS
 import ManageAdd from '../SystemAdd/ManageAdd';
 import { Link } from "react-router-dom";
 import {ManageColumns} from './ColumnTable'; //ColumnTable 내에 함수 사용
 import SideBarSystem from '../../utils/SideBarSystem';
 import ManageUpdate from '../SystemUpdate/ManageUpdate';
+import {useDispatch} from 'react-redux';
+import {UserRead, UserDelete, DeptCodeListRead, DeptCodeSearch} from '../../_actions/system_action';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
-function Manage(props) {
+function Manage() {
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);//칼럼 안 데이터
   const [DeptList, setDeptList] = useState(['']); //부서검색
   const { Option } = Select;
   const [Visible, setVisible] = useState(false); //modal 관리
 
   //dispatch로 가져오도록 바꿀 예정====================================
-  //직원 데이터 조회
   useEffect(() => {
-    axios.get('/api/users/read').then(response => {
-      setData(response.data);
-    });
-    axios.get('/api/deptlist').then(response => {
-      setDeptList(response.data);
-    });
+    //직원 데이터 Read
+    dispatch(UserRead())
+      .then(response=>{
+        setData(response.payload);
+      });
+    //부서코드 리스트 Read
+    dispatch(DeptCodeListRead())
+      .then(response=>{
+        setDeptList(response.payload);
+      });
 }, []);
-  //직원 데이터 삭제
+  //직원관리 삭제 버튼
   const handleDelete = () => {
-    axios.post('/api/users/delete', CheckTarget).then(res =>{
-      if(res.data.success){
-        alert('삭제되었습니다.');
-        window.location.reload();
-      }
-    })
+    //유저 데이터 Delete
+    dispatch(UserDelete(CheckTarget))
+      .then(response=>{
+        if(response.payload.success){
+          alert('삭제되었습니다.');
+          window.location.reload();
+        }
+        else{
+          alert('삭제 실패...');
+        }
+      });
   }
   //=================================================================
   //체크박스
-  const [CheckTarget, setCheckTarget] = useState([]); //체크 박스 한 대상
+  const [CheckTarget, setCheckTarget] = useState(['']); //체크 박스 한 대상
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -59,22 +69,24 @@ function Manage(props) {
     setVisible(false);
   }
   ///////////////////////////////////////////
-  
   //근무부서 선택
   function onChange(value) {
-    if(value === 'All'){
-      axios.get('/api//users/read').then(response => {  
-        setData(response.data);
-      });
-      console.log(value);
-    }else{
-      console.log(value);
+    if(value === 'All') {
+     //직원 데이터 Read
+      dispatch(UserRead())
+        .then(response=>{
+          setData(response.payload);
+        });
+    }
+    else {
       let body = {
         SmallInfo : value
       }
-      axios.post('/api/deptCodelist',body).then(response => {  
-        setData(response.data);
-      }); 
+      //부서코드 Search
+      dispatch(DeptCodeSearch(body))
+        .then(response=>{
+          setData(response.payload);
+        });
     }
   }
   // 수정 버튼
@@ -109,15 +121,6 @@ function Manage(props) {
             style={{background: '#fff'}}
           />
           <Content>
-          {/* <Breadcrumb style = {{background: '#fff', minHeight: 100}}>
-              <Breadcrumb.Item>
-                <PageHeader
-                  className="site-page-header"
-                  title="직원관리"
-                  subTitle="직원관리 페이지">   
-                </PageHeader>
-              </Breadcrumb.Item>
-            </Breadcrumb> */}
             {/* 부서선택 */}
             <div style = {{fontSize: 20,background: '#fff', minHeight: 2}}>
               <Select showSearch style={{ width: 200 }} placeholder="근무부서 검색"

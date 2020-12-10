@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import 'antd/dist/antd.css'; //antd디자인 CSS
-import axios from 'axios';
 import { Layout, Table, Tabs, PageHeader } from 'antd';
 import LoginedUser from '../../../../utils/LoginedUser';////utils
 import LogoutUser from '../../../../utils/LogoutUser';
@@ -9,12 +8,13 @@ import { workManageColumn } from './WorkManageColumns'; //업무 칼럼
 import WorkManageSend from './WorkManageSend'; //업무지시 페이지
 import WorkManageInfo from './WorkManageInfo';
 import '../../user.css';
+import {useDispatch} from 'react-redux';
+import {WorkManageDataRead} from '../../../../_actions/user_action';
 
-//칼럼
-const { Header } = Layout; //Layout부분을  Header , Content ,Sider, Footer로 나눠서 사용한다.
 const { TabPane } = Tabs;
 
   function WorkManage(props) {
+    const dispatch = useDispatch();
     //업무 상세보기
     const [Visible, setVisible] = useState(false);
     const [UserData, setUserData] = useState(['']);
@@ -32,14 +32,14 @@ const { TabPane } = Tabs;
     const handleCancel = () => {
       setVisible(false);
     }
-    //업무 조회 데이터 가져오기
-    const [Data, setData] = useState(['']);
-
+    const [Data, setData] = useState(['']); //업무조회 데이터 변수
+    
     useEffect(() => {
-      axios.get('/api/workmanageread').then(response => {
-        console.log(response.data);
-        setData(response.data);
-      }); 
+      //업무조회 데이터 Read
+      dispatch(WorkManageDataRead())
+        .then(response=>{
+          setData(response.payload);
+        });
     }, []);
       return (
           <Layout>

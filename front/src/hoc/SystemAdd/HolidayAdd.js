@@ -1,9 +1,8 @@
 import React, {useState,useEffect} from 'react'
 import { Select, Modal, Alert, Input} from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { holidayInfo } from '../../_actions/holiday_action';
+import { HolidayCreate, HolyCodeListRead } from '../../_actions/system_action';
 import moment from 'moment'
 
 const { Option } = Select;
@@ -20,11 +19,12 @@ function HolidayAdd(props) {
     //휴일 종류 설정
   const [HolyList, setHolyList] = useState(['']);
 
-  useEffect(() => {   
-    axios.get('/api/holylist').then(response => {
-      //console.log(response.data);
-      setHolyList(response.data);
-    });
+  useEffect(() => {
+    //휴일종류 코드 리스트 Read
+    dispatch(HolyCodeListRead())
+        .then(response=>{
+          setHolyList(response.payload);
+        });
   }, []);
     //비고 변수 초기화
     const [HoliContent,setHoliContent] =useState(); 
@@ -41,7 +41,8 @@ function HolidayAdd(props) {
         SaveCode, //소코드
         HoliContent, //비고
       }
-      dispatch(holidayInfo(body))
+      //휴일 데이터 Create
+      dispatch(HolidayCreate(body))
               .then(response => { 
                   if(response.payload.holidaySaveSuccess){ 
                     alert('Success!',);

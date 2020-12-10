@@ -6,7 +6,7 @@ import LogoutUser from '../../../../utils/LogoutUser';
 import SideBar from '../../../../utils/SideBarPresident';///여기까지
 import MainWork from '../../Employee/MainPage/MainWork'; //근무조회
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 function PrezMainPage(props) {
   return (

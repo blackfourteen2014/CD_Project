@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from 'react'
-import { Layout, PageHeader, Button, Breadcrumb, Modal } from 'antd';
+import { Layout, PageHeader, Button, Modal } from 'antd';
 import 'antd/dist/antd.css'; //antd디자인 CSS
-import axios from 'axios';
 import { Link } from "react-router-dom";
 import HolidayAdd from '../SystemAdd/HolidayAdd';
 import moment from 'moment'
@@ -10,53 +9,46 @@ import 'react-big-calendar/lib/sass/styles.scss';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.scss';
 import './Calendar.scss' //scss 재정의=======================================
 import SideBarSystem from '../../utils/SideBarSystem';
+import {CustomToolbar} from '../../utils/CustomToolbar'; //캘린더 툴바 커스텀
+import { useDispatch } from 'react-redux';
+import {HolidayDataRead, HolidayDelete} from '../../_actions/system_action'; //휴일 function
 
 const localizer = momentLocalizer(moment)
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 function Holiday(props) {
+  const dispatch = useDispatch();
   const [ListData, setListData] = useState([]);
 
   useEffect(() => {         
-    axios.get('/api/holidaydataread').then(response => {
-      // response.data.map(listData => (
-      // console.log(response.data);
-      // ));
-      setListData(response.data);
-    });
+    //휴일 데이터 Read 
+    dispatch(HolidayDataRead())
+      .then(response => {
+        setListData(response.payload);
+      });   
 }, []);
-  // //delete
-  // const handleDelete = (value) => {
-  //   console.log(value);
-  //   axios.post('/api/holidaydelete', value).then(res =>{
-
-  //    if(res.data.success){
-  //    alert('삭제되었습니다.');
-  //    window.location.reload();
-  //     }
-  //   })
-  // }
-  //삭제 모달창 구현================================================================================
+  //삭제 모달창 구현===================================
   const [Delvisible, setDelVisible] = useState(false);
   const showModal = (value) => {
     console.log(value);
     setDelVisible(value);
   };
-  //취소 눌렀을때
+  //취소 눌렀을 때
   const DelhandleCancel = () => {
     setDelVisible(false);
   };
-  //ok눌렀을때
+  //ok 눌렀을 때
   const DelhandleOk = () => {
     setDelVisible(false);
-    axios.post('/api/holidaydelete',Delvisible).then(res =>{
-      if(res.data.success){
-      window.location.reload();
-       }
-    })
+    //휴일 데이터 Delete
+    dispatch(HolidayDelete(Delvisible))
+      .then(response => {
+        if(response.payload.success) {
+            window.location.reload();
+        }
+      }); 
   };
-  //캘린더================================================================================
-  //const [Date, setDate] = useState('');
+  //캘린더========================================
   const [Visible, setVisible] = useState(false);
   //팝업 OFF
   const handleCancel = () => {
@@ -75,46 +67,6 @@ function Holiday(props) {
     setStartDate(e.start);
     setVisible(true);
   }
-
-  //툴바 커스텀
-  const CustomToolbar = (toolbar) => {
-    //이전 달 버튼 이벤트
-    const goToBack = () => {
-      toolbar.date.setMonth(toolbar.date.getMonth() - 1);
-      toolbar.onNavigate('prev');
-    };
-    //다음 달 버튼 이벤트
-    const goToNext = () => {
-      toolbar.date.setMonth(toolbar.date.getMonth() + 1);
-      toolbar.onNavigate('next');
-    };
-    // Today버튼 이벤트
-    const goToCurrent = () => {
-      const now = new Date();
-      toolbar.date.setMonth(now.getMonth());
-      toolbar.date.setYear(now.getFullYear());
-      toolbar.onNavigate('current');
-    };
-    //label ex)11 2020
-    const label = () => {
-      const date = moment(toolbar.date);
-      return (
-        <span><b>{date.format('MM')}</b><span style={{fontSize:'20px'}}> {date.format('YYYY')}</span></span>
-      );
-    };
-    return (
-      <div className={Calendar['toolbar-container']}>
-        <label className={Calendar['label-date']} style={{fontSize:'30px'}}>{label()}</label>
-  
-        <div className={Calendar['back-next-buttons']}>
-          <Button className={Calendar['btn-back']} onClick={goToBack}>&#8249;</Button>
-          <Button className={Calendar['btn-current']} onClick={goToCurrent}>Today</Button>
-          <Button className={Calendar['btn-next']} onClick={goToNext}>&#8250;</Button>
-        </div>
-      </div >
-    );
-  };
-  //===========================================================================================
   return (
     <div>
       <Layout style={{ minHeight: '100vh' }}>
@@ -132,14 +84,7 @@ function Holiday(props) {
             subTitle="휴일설정 페이지"
             style={{background: '#fff'}}
           /> 
-            {/* </Header> */}
             <Content>
-            {/* <Breadcrumb style = {{background: '#fff', minHeight: 10}}>
-                <Breadcrumb.Item>
-                  
-                </Breadcrumb.Item>
-              </Breadcrumb>  */}
-              {/* 캘린더 */}
               <Modal
                     visible={Delvisible}
                     centered

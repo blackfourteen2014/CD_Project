@@ -36,7 +36,7 @@
 <img src='./images/20_10_16_자문.PNG' width='550px'>
 
 - 10월 29-30일 : Big Data Capstone 중간 발표회 포스터 제작 및 토의
-<img src='./images/20년2학기포스터_빅데이터_BlackFourTeen.png'>
+<img src='./images/20년2학기포스터_빅데이터_BlackFourTeen.png' width='550px'>
 
 - 11월 1일 -> 현재 : 개발 중 (깃허브 저장소 : https://github.com/blackfourteen2014/CD_Project)
 
