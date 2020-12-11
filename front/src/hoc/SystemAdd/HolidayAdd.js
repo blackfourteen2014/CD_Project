@@ -25,7 +25,7 @@ function HolidayAdd(props) {
         .then(response=>{
           setHolyList(response.payload);
         });
-  }, []);
+  });
     //비고 변수 초기화
     const [HoliContent,setHoliContent] =useState(); 
     //비고 설정

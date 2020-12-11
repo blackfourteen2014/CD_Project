@@ -35,7 +35,7 @@ function PrezHoli(props){
       .then(response=>{
         setHolidayUserData(response.payload);
       });
-}, []);
+});
   
     const [Visible, setVisible] = useState(false);
     //팝업 ON

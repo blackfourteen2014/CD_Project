@@ -40,7 +40,7 @@ const { TabPane } = Tabs;
         .then(response=>{
           setData(response.payload);
         });
-    }, []);
+    });
       return (
           <Layout>
             <SideBar DefaultKey={'3'}/>

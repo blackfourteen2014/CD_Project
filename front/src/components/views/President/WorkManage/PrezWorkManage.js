@@ -39,7 +39,7 @@ function PrezWorkManage(props){
       .then(response=>{
         setData(response.payload);
       });
-  }, []);
+  });
 
     return(
         <Layout>

@@ -36,7 +36,7 @@ function HolidayUser(props) {
       .then(response => {
         setHolidayUserData(response.payload);
       });
-}, []);
+  });
   //캘린더====================================================================================
   const [Visible, setVisible] = useState(false);
   //팝업 ON

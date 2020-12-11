@@ -13,7 +13,6 @@ import {
     MYPAGEPASSWORD_UPDATE,
     USERWORK_READ,
     EMPLOYEEMANAGEUSERLIST_READ,
-    EMPLOYEEMANAGEUSERWORKDEPTCODELIST_READ,
     EMPLOYEEMANAGEUSERMONTHLYLIST_READ,
     HOLIDAYPREZUSERLIST_READ,
     HOLIDAYUSERCONFIRM_UPDATE
@@ -80,7 +79,7 @@ export function HolidayUserCreate(dataToSubmit){
 }
 //업무조회 데이터 Read
 export function WorkManageDataRead(){
-    const request = axios.get('/api/workmanageread')
+    const request = axios.get('/api/users/workmanageread')
         .then(response => response.data)
     
     return {
@@ -90,7 +89,7 @@ export function WorkManageDataRead(){
 }
 //업무지시 직원리스트 READ
 export function WorkManageUserListRead(){
-    const request = axios.get('/api/workmanageuserlist')
+    const request = axios.get('/api/users/workmanageuserlist')
         .then(response => response.data)
     
     return {
@@ -100,7 +99,7 @@ export function WorkManageUserListRead(){
 }
 //업무지시로 보낸 메세지 Save(저장)
 export function WorkManageDataSave(dataToSubmit){
-    const request = axios.post('/api/workmanagesave',dataToSubmit)
+    const request = axios.post('/api/users/workmanagesave',dataToSubmit)
         .then(response => response.data)
     
     return {
@@ -140,7 +139,7 @@ export function MyPagePasswordUpdate(dataToSubmit){
 }
 //직원근무조회 유저리스트 Read
 export function EmployeeManageUserListRead(dataToSubmit){
-    const request = axios.post('/api/employeemanageuserlist', dataToSubmit)
+    const request = axios.post('/api/users/employeemanageuserlist', dataToSubmit)
         .then(response => response.data)
     
     return {
@@ -148,19 +147,10 @@ export function EmployeeManageUserListRead(dataToSubmit){
         payload: request //true,false를 받는 부분
     }
 }
-//직원근무조회 부서코드로 유저 근무조회
-export function EmployeeManageUserWorkDeptCodeListRead(dataToSubmit){
-    const request = axios.post('/api/employeeworkdeptcodelistread', dataToSubmit)
-        .then(response => response.data)
-    
-    return {
-        type: EMPLOYEEMANAGEUSERWORKDEPTCODELIST_READ,
-        payload: request //true,false를 받는 부분
-    }
-}
+
 //직원근무조회 클릭 시 월별 근무 조회
 export function EmployeeManageUserMonthlyListRead(dataToSubmit){
-    const request = axios.post('/api/employeemanageusermonthlylistread', dataToSubmit)
+    const request = axios.post('/api/users/employeemanageusermonthlylistread', dataToSubmit)
         .then(response => response.data)
     
     return {
@@ -170,7 +160,7 @@ export function EmployeeManageUserMonthlyListRead(dataToSubmit){
 }
 //직원의 연가 데이터 Read
 export function HolidayPrezUserListRead(){
-    const request = axios.get('/api/holidayprezuserlistread')
+    const request = axios.get('/api/users/holidayprezuserlistread')
         .then(response => response.data)
     
     return {
@@ -180,7 +170,7 @@ export function HolidayPrezUserListRead(){
 }
 //연가 승인 Update
 export function HolidayUserConfirm(dataToSubmit){
-    const request = axios.post('/api/holidayuserconfirm', dataToSubmit)
+    const request = axios.post('/api/users/holidayuserconfirm', dataToSubmit)
         .then(response => response.data)
     
     return {

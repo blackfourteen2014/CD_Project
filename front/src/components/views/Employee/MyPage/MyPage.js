@@ -21,7 +21,7 @@ function MyPage() {
       .then(response => {
         setUser(response.payload);
       });
-  }, []);
+  });
   //팝업
   const [Visible, setVisible] = useState(false);
 

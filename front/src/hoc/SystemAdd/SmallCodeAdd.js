@@ -37,7 +37,7 @@ function CodeAdd(props){
       .then(response=>{
         setData(response.payload);
       });
-  }, []);
+  });
   
 //팝업 저장(유저 생성)
   const handleOk = () => {

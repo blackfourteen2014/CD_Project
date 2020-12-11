@@ -51,4 +51,20 @@ router.post('/holidaydelete',(req,res)=>{
         });
       });
   });
+//휴일종류코드리스트 Read
+router.get('/holycodelistread', (req,res) => {
+  db.query('SELECT * from MasterCode where LargeInfo like ?',['%휴일%'],(error,data)=>{
+    if(error) throw error;
+    //console.log(data[0]);
+    if(data[0] != undefined){
+      db.query('SELECT * from SmallCode where SmallCode like ?',[`%${data[0].LargeCode}%`],(error2,depts)=>{
+        if(error2) throw error2;
+        //console.log(depts);
+        res.send(depts);
+      });
+    } else {
+      res.send(['']);
+    }
+  });
+});
 module.exports = router;

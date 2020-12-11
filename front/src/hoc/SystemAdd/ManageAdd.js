@@ -2,7 +2,7 @@ import React,{ useState,useEffect } from 'react';
 import { Modal, Select,Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import { UserCreate } from '../../_actions/system_action';
-import axios from 'axios';
+import {DeptCodeListRead, RankCodeListRead} from '../../_actions/system_action';
 
 const { Option } = Select;
 
@@ -85,13 +85,15 @@ function ManageAdd(props){
   const [RankList, setRankList] = useState(['']);
 
   useEffect(() => {
-    axios.get('/api/deptlist').then(response => {
-      setDeptList(response.data);
+    //부서코드 리스트 Read
+    dispatch(DeptCodeListRead()).then(response=>{
+      setDeptList(response.payload);
     });
-    axios.get('/api/ranklist').then(response => {
-      setRankList(response.data);
+    //직급코드 리스트 Read
+    dispatch(RankCodeListRead()).then(response=>{
+      setRankList(response.payload);
     });
-}, []);
+});
 
   return (
     <>

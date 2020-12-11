@@ -49,7 +49,7 @@ function MainWork(){
 
   useEffect(() => {
     WorkRead(CurrentYear,CurrentMonth);
-  }, []);
+  });
   //년도 바꿈
   const ChangeYear = (value) => {
     //console.log(value);

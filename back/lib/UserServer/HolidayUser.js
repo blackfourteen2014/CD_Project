@@ -33,5 +33,47 @@ router.post('/holidayusercreate',(req,res) => {
       });
     });
 });
-
+//대표 유저 연가 조회
+router.get('/holidayprezuserlistread', (req, res) => {
+  db.query('SELECT * from HolidayUser ORDER BY confirmYN DESC', (error, lists) => {
+    if (error) throw error;
+    let temp = [];
+    let data = {};
+    let key = 0;
+    lists.forEach(list => {
+      //console.log(list);
+      data = {
+        key : String(key+1),
+        id : list.id,
+        startDate: list.StartDate,
+        endDate: list.EndDate,
+        type: list.SelectedLeave,
+        content: list.Des,
+        confirmYN : list.confirmYN
+      }
+      temp.push(data);
+      key++;
+    });
+    res.send(temp);
+  });
+});
+//대표 유저 연가 승인
+router.post('/holidayuserconfirm',(req,res)=>{
+  //console.log(req.body[0].id);
+  const userData = req.body;
+  userData.forEach(user => {
+    db.query('UPDATE HolidayUser SET confirmYN = ? where id = ? AND startDate = ? AND EndDate = ?',
+    [
+      '승인',
+      user.id,
+      user.startDate,
+      user.endDate
+    ],(error,result)=>{
+    if(error)throw error;
+    return res.json({
+      success : true
+    });
+  });
+  });
+});
 module.exports = router;

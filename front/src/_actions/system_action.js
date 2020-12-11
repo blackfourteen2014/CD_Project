@@ -15,7 +15,6 @@ import {
     USER_CREATE,
     USER_UPDATE,
     USER_DELETE,
-    DEPTCODE_SEARCH,
     DEPTCODELIST_READ,
     RANKCODELIST_READ
 } from './types';
@@ -51,7 +50,7 @@ export function HolidayDelete(dataToSubmit){
 }
 //휴일종류 코드 리스트 Read
 export function HolyCodeListRead(){
-    const request = axios.get('/api/holycodelistread')
+    const request = axios.get('/api/system/holycodelistread')
         .then(response => response.data)
 
     return {
@@ -169,19 +168,9 @@ export function UserDelete(dataToSubmit){
         payload: request //true,false를 받는 부분
     }
 }
-//부서코드 Search
-export function DeptCodeSearch(dataToSubmit){
-    const request = axios.post('/api/deptCodelist', dataToSubmit)
-        .then(response => response.data)
-    
-    return {
-        type: DEPTCODE_SEARCH,
-        payload: request //true,false를 받는 부분
-    }
-}
 //부서코드 리스트 Read
 export function DeptCodeListRead(){
-    const request = axios.get('/api/deptlist')
+    const request = axios.get('/api/system/deptlist')
         .then(response => response.data)
 
     return {
@@ -191,7 +180,7 @@ export function DeptCodeListRead(){
 }
 //직급코드  리스트 Read
 export function RankCodeListRead(){
-    const request = axios.get('/api/ranklist')
+    const request = axios.get('/api/system/ranklist')
         .then(response => response.data)
 
     return {

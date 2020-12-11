@@ -82,7 +82,7 @@ function Code() {
         .then(response=>{
           setMasterData(response.payload);
         });
-  }, []);
+  });
 
   return (
     <div>

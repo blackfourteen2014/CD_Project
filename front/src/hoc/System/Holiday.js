@@ -26,7 +26,7 @@ function Holiday(props) {
       .then(response => {
         setListData(response.payload);
       });   
-}, []);
+});
   //삭제 모달창 구현===================================
   const [Delvisible, setDelVisible] = useState(false);
   const showModal = (value) => {

@@ -49,7 +49,7 @@ function MasterCode() {
       .then(response=>{
         setData(response.payload);
       });
-  }, []);
+  });
 
   return (
     <div>

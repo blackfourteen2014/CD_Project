@@ -7,7 +7,8 @@ import {ManageColumns} from './ColumnTable'; //ColumnTable 내에 함수 사용
 import SideBarSystem from '../../utils/SideBarSystem';
 import ManageUpdate from '../SystemUpdate/ManageUpdate';
 import {useDispatch} from 'react-redux';
-import {UserRead, UserDelete, DeptCodeListRead, DeptCodeSearch} from '../../_actions/system_action';
+import {UserRead, UserDelete, DeptCodeListRead} from '../../_actions/system_action';
+import {DeptCodeSearch}  from '../../_actions/all_action';
 
 const { Content } = Layout;
 
@@ -30,7 +31,7 @@ function Manage() {
       .then(response=>{
         setDeptList(response.payload);
       });
-}, []);
+});
   //직원관리 삭제 버튼
   const handleDelete = () => {
     //유저 데이터 Delete

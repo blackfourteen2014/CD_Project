@@ -5,7 +5,8 @@ import moment from 'moment';
 import '../../user.css';
 import {useDispatch} from 'react-redux';
 import {WorkManageUserListRead, WorkManageDataSave} from '../../../../_actions/user_action';
-import {DeptCodeSearch, DeptCodeListRead}  from '../../../../_actions/system_action';
+import {DeptCodeListRead}  from '../../../../_actions/system_action';
+import {DeptCodeSearch}  from '../../../../_actions/all_action';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -24,7 +25,7 @@ function WorkManageSend() {
     };
     //업무지시 부서검색
     function onSelectChange(value) {
-        if(value == 'All'){
+        if(value === 'All'){
             dispatch(WorkManageUserListRead())
                 .then(response=>{
                     setUserList(response.payload);
@@ -105,7 +106,7 @@ function WorkManageSend() {
                 .then(response=>{
                     setDeptList(response.payload);
                 });
-    }, [])
+    });
 
     return (
         <div>

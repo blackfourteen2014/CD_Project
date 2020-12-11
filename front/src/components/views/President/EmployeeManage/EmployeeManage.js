@@ -9,11 +9,11 @@ import {EmployeeManageColum} from './EmployeeManageColums';
 import moment from 'moment';
 import {useDispatch} from 'react-redux';
 import {
-  EmployeeManageUserListRead, 
-  EmployeeManageUserWorkDeptCodeListRead,
+  EmployeeManageUserListRead,
   EmployeeManageUserMonthlyListRead
 } from '../../../../_actions/user_action';
 import {DeptCodeListRead} from '../../../../_actions/system_action';
+import {EmployeeManageUserWorkDeptCodeListSearch} from '../../../../_actions/all_action';
 
 const { Content } = Layout;
 const { Option } = Select;
@@ -35,7 +35,7 @@ function EmployeeManage(props){
         SaveDate : SaveDate[0]
       }
       //직원근무조회 부서코드로 유저 근무조회
-      dispatch(EmployeeManageUserWorkDeptCodeListRead(body))
+      dispatch(EmployeeManageUserWorkDeptCodeListSearch(body))
         .then(response=>{
           setUserList(response.payload);
         });

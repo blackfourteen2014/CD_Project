@@ -7,7 +7,7 @@ function MyPageUpdate(props) {
     const dispatch = useDispatch();
     const handleUpdateOk = () => {
         props.handleOk();
-        if(props.Password == props.CheckPassword){
+        if(props.Password === props.CheckPassword){
             let body = {
               Password : props.Password,
               id : props.User[0].id

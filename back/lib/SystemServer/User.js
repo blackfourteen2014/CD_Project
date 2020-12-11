@@ -91,5 +91,28 @@ router.get('/read', (req, res) => {
         });
       });
     });
-
+//부서코드 리스트 Read
+router.get('/deptlist', (req,res) => {
+  db.query('SELECT * from MasterCode where LargeInfo like ?',['%부서%'],(error,data)=>{
+    if(error) res.send(['']);
+    //console.log(data[0].LargeCode);
+    db.query('SELECT * from SmallCode where SmallCode like ?',[`%${data[0].LargeCode}%`],(error2,depts)=>{
+      if(error2) res.send(['']);
+      //console.log(depts);
+      res.send(depts);
+    });
+  });
+});
+//직급코드 리스트 Read
+router.get('/ranklist', (req,res) => {
+db.query('SELECT * from MasterCode where LargeInfo like ?',['%직급%'],(error,data)=>{
+  if(error) res.send(['']);
+  //console.log(data[0].LargeCode);
+  db.query('SELECT * from SmallCode where SmallCode like ?',[`%${data[0].LargeCode}%`],(error2,ranks)=>{
+    if(error2) res.send(['']);
+    //console.log(ranks);
+    res.send(ranks);
+  });
+});
+});
   module.exports = router;
