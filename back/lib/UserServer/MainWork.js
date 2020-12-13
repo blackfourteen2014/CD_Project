@@ -13,7 +13,7 @@ router.post("/mainworkread", (req, res) => {
       if (error) throw error;
       let temp = [];
       let data = {};
-      let i = 0;
+      let key = 0;
       let workTime = 0;
       let workTimeSum = 0;
       works.forEach((work) => {
@@ -33,7 +33,7 @@ router.post("/mainworkread", (req, res) => {
           workTime = 0;
         }
         data = {
-          key: String(i + 1),
+          key: String(key + 1),
           date: work.Date,
           onWork: work.OnWork,
           offWork: work.OffWork,
@@ -42,7 +42,7 @@ router.post("/mainworkread", (req, res) => {
           overWorkContent: work.OverWorkContent,
         };
         temp.push(data);
-        i++;
+        key++;
       });
       //res.send(temp);
       return res.json({

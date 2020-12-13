@@ -32,7 +32,7 @@ router.get("/workmanageread", (req, res) => {
   //console.log(req.session.userId);
   let sendData = [];
   let data = {};
-  let i = 0;
+  let key = 0;
   db.query(
     "SELECT * from WorkManage Join employee ON employee.id = WorkManage.sendId where WorkManage.getId = ? ORDER BY startDate DESC",
     [req.session.userId],
@@ -42,7 +42,7 @@ router.get("/workmanageread", (req, res) => {
       reads.forEach((read) => {
         //console.log(i,' : ',read);
         data = {
-          key: String(i + 1),
+          key: String(key + 1),
           Date: read.startDate,
           EndDate: read.endDate,
           Dept: read.dept,
@@ -52,7 +52,7 @@ router.get("/workmanageread", (req, res) => {
           Dsc: read.workDes,
         };
         sendData.push(data);
-        i++;
+        key++;
       });
       res.send(sendData);
     }
@@ -62,7 +62,7 @@ router.get("/workmanageread", (req, res) => {
 router.get("/workmanageuserlist", (req, res) => {
   let listData = [];
   let data = {};
-  let i = 0;
+  let key = 0;
   //console.log(req.session.userId);
   db.query(
     "SELECT * from employee where not id = ?",
@@ -74,12 +74,12 @@ router.get("/workmanageuserlist", (req, res) => {
         //console.log(user.id);
         //console.log(user.name);
         data = {
-          key: String(i + 1),
+          key: String(key + 1),
           id: user.id,
           name: user.name,
         };
         listData.push(data);
-        i++;
+        key++;
       });
       res.send(listData);
     }
