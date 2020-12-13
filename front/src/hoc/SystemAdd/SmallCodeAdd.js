@@ -1,28 +1,28 @@
-import React, {useState,useEffect} from 'react'
-import { Modal, Select,Input } from 'antd';
-import { useDispatch } from 'react-redux';
-import { SmallCodeCreate, MasterCodeRead } from '../../_actions/system_action';
+import React, { useState, useEffect } from "react";
+import { Modal, Select, Input } from "antd";
+import { useDispatch } from "react-redux";
+import { SmallCodeCreate, MasterCodeRead } from "../../_actions/system_action";
 
 const { Option } = Select;
 
-function CodeAdd(props){
+function CodeAdd(props) {
   const dispatch = useDispatch(); //redux
-  const [SmallCode, setSmallCode] = useState(''); //스몰 코드 변수
-  const [SmallInfo, setSmallInfo] = useState(''); //스몰 코드 정보 변수
-  const [SmallContent, setSmallContent] = useState(''); //스몰 코드 비고 변수
+  const [SmallCode, setSmallCode] = useState(""); //스몰 코드 변수
+  const [SmallInfo, setSmallInfo] = useState(""); //스몰 코드 정보 변수
+  const [SmallContent, setSmallContent] = useState(""); //스몰 코드 비고 변수
 
-//스몰 코드 변수 설정 기능
+  //스몰 코드 변수 설정 기능
   const handleChangeSmallCode = (e) => {
     setSmallCode(e.currentTarget.value);
-  }
+  };
   const handleChangeSmallInfo = (e) => {
     setSmallInfo(e.currentTarget.value);
-  }
-  const handleChangeSmallContent= (e) => {
+  };
+  const handleChangeSmallContent = (e) => {
     setSmallContent(e.currentTarget.value);
-  }
+  };
 
-  const [SaveCode,setSaveCode] = useState(''); //대코드 저장
+  const [SaveCode, setSaveCode] = useState(""); //대코드 저장
 
   function onChange(value) {
     console.log(value);
@@ -31,71 +31,72 @@ function CodeAdd(props){
 
   //대코드 종류 설정
   const [data, setData] = useState([]);
-  useEffect(() => { 
-    //대코드 데이터 Read        
-    dispatch(MasterCodeRead())
-      .then(response=>{
-        setData(response.payload);
-      });
+  useEffect(() => {
+    //대코드 데이터 Read
+    dispatch(MasterCodeRead()).then((response) => {
+      setData(response.payload);
+    });
   });
-  
-//팝업 저장(유저 생성)
+
+  //팝업 저장(유저 생성)
   const handleOk = () => {
     props.handleOk();
 
     let body = {
-      LargeCode:SaveCode,
-      SmallCode:SmallCode,
-      SmallInfo:SmallInfo,
-      SmallContent:SmallContent,
-    }
+      LargeCode: SaveCode,
+      SmallCode: SmallCode,
+      SmallInfo: SmallInfo,
+      SmallContent: SmallContent,
+    };
 
-    dispatch(SmallCodeCreate(body))
-            .then(response => { 
-                if(response.payload.smallcodeSaveSuccess){ 
-                  window.location.reload();//전체 페이지를 리로드(실제 배포할 때는 리로드할 구역을 살정해야함)
-                  alert('Success!',);
-                  console.log(response.payload.smallcodeSaveSuccess);
-                }
-                else {
-                  alert('Failed to sign up...');
-                }
-            }) 
-          }
+    dispatch(SmallCodeCreate(body)).then((response) => {
+      if (response.payload.smallcodeSaveSuccess) {
+        window.location.reload(); //전체 페이지를 리로드(실제 배포할 때는 리로드할 구역을 살정해야함)
+        alert("Success!");
+        console.log(response.payload.smallcodeSaveSuccess);
+      } else {
+        alert("Failed to sign up...");
+      }
+    });
+  };
 
   return (
     <>
       <Modal
-      title="추가"
-      visible={props.Visible}
-      onOk={handleOk}
-      onCancel={props.handleCancel}
+        title="추가"
+        visible={props.Visible}
+        onOk={handleOk}
+        onCancel={props.handleCancel}
       >
         <div>대코드</div>
-        <Select showSearch style={{ width: 472 }} placeholder="마스터코드 지정"
+        <Select
+          showSearch
+          style={{ width: 472 }}
+          placeholder="마스터코드 지정"
           optionFilterProp="children"
           onChange={onChange}
           filterOption={(input, option) =>
-          option.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+            option.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
         >
-          {data.map(code => (
+          {data.map((code) => (
             <Option key={code.LargeCode}>{code.LargeInfo}</Option>
           ))}
         </Select>
         <div>소코드</div>
-        <Input 
+        <Input
           placeholder=""
           value={SmallCode}
           onChange={handleChangeSmallCode}
         />
         <div>코드정보</div>
-        <Input 
+        <Input
           placeholder=""
           value={SmallInfo}
           onChange={handleChangeSmallInfo}
         />
         <div>비고</div>
-        <Input 
+        <Input
           placeholder="NULL가능"
           value={SmallContent}
           onChange={handleChangeSmallContent}
@@ -105,4 +106,4 @@ function CodeAdd(props){
   );
 }
 
-export default CodeAdd
+export default CodeAdd;

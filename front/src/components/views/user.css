@@ -1,256 +1,256 @@
 /* ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ MainPage css ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ */
 /* [antd 전체 적용] 페이지 전체의 Layout부분 크기 */
-.ant-layout{
-    min-height: 100vh;
+.ant-layout {
+  min-height: 100vh;
 }
 /* [antd 전체 적용] Layout의 Header부분 배경색, 오른쪽정렬 */
-.ant-layout-header{
-    background-color: white;
-    text-align: end;
+.ant-layout-header {
+  background-color: white;
+  text-align: end;
 }
 /* [antd 전체 적용] Layout의 Content부분 가운데정렬 */
-.ant-layout-content{
-    margin: 0 16px;
+.ant-layout-content {
+  margin: 0 16px;
 }
 /* MainWork Content 내부 전체 묶음 틀 가운데정렬, 너비조정 */
-#mainwrap{
-    margin: 0 auto;
-    width: 100%;
+#mainwrap {
+  margin: 0 auto;
+  width: 100%;
 }
 /* MainWork 년, 월, 인쇄버튼 통합 부분 밑으로 조금 띄우기*/
-#mainheader{
-    margin-bottom: 20px;
+#mainheader {
+  margin-bottom: 20px;
 }
 /* MainWork 년, 월 선택 부분 */
-#dateheader{
-    display: inline-block;
-    margin-left: 44%;
+#dateheader {
+  display: inline-block;
+  margin-left: 44%;
 }
 /* MainWork 년도 선택 너비 */
-.selectyear{
-    width: 80px;
+.selectyear {
+  width: 80px;
 }
 /* MainWork 월 선택 너비 */
-.selectmonth{
-    width: 60px;
+.selectmonth {
+  width: 60px;
 }
 /* MainWork 인쇄 버튼 오른쪽정렬 */
-#printheader{
-    display: inline-block;
-    float: right;
+#printheader {
+  display: inline-block;
+  float: right;
 }
 /* MainWork 근무현황 위치, 가운데정렬 */
-#printtitle{
-    display: inline-block;
-    margin-left: 40%;
-    text-align: center;
+#printtitle {
+  display: inline-block;
+  margin-left: 40%;
+  text-align: center;
 }
 /* MainWork (초과)근무시간 합계 레이블 너비, 가운데정렬, 배경색 */
-.worktimeleft{
-    display: inline-block;
-    width: 40%;
-    text-align:center;
-    background-color: orange;
+.worktimeleft {
+  display: inline-block;
+  width: 40%;
+  text-align: center;
+  background-color: orange;
 }
 /* MainWork (초과)근무시간 합계 출력부분 너비, 가운데정렬, 배경색 */
-.worktimeright{
-    display: inline-block;
-    width: 10%;
-    text-align:center;
-    background-color: white;
+.worktimeright {
+  display: inline-block;
+  width: 10%;
+  text-align: center;
+  background-color: white;
 }
 
 /* ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ HolidayUser css ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ */
 /* HolidayUser 연가신청 버튼 오른쪽정렬 */
-.btn{
-    float: right;
+.btn {
+  float: right;
 }
 /* HolidayUser Calendar 높이, 글씨크기 */
-.cal{
-    height: 700px;
-    font-size: 20px;
+.cal {
+  height: 700px;
+  font-size: 20px;
 }
 
 /* HolidayUserAdd 연가신청 표 크기 */
-.descript{
-    width: 700px;
+.descript {
+  width: 700px;
 }
 /* HolidayUserAdd 연가신청 전체 가운데 정렬 */
-.desc_item{
-    text-align: center;
+.desc_item {
+  text-align: center;
 }
 /* HolidayUserAdd 연가종류, 내용 입력부분(select, inpt) 너비 */
-.holyinput{
-    width: 450px;
+.holyinput {
+  width: 450px;
 }
 
 /* ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ MyPage css ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ */
 /* MyPageCheck Layout의 Header부분 배경색, 오른쪽정렬*/
-.myheader{
-    background-color: white;
-    text-align: end;
+.myheader {
+  background-color: white;
+  text-align: end;
 }
 /* MyPageCheck Layout의 Content부분 배경색 */
-.mycontent{
-    margin: 0;
-    background-color: white;
+.mycontent {
+  margin: 0;
+  background-color: white;
 }
 /* 개인정보변경 부분 최소 높이 지정 */
-.mybreadcrumb{
-    min-height: 100px;
+.mybreadcrumb {
+  min-height: 100px;
 }
 /* MyPageCheck 내용물 틀 너비, 높이, 가운데정렬 */
-.mymain{
-    width: 50%;
-    height: 400px;
-    margin: 0 auto;
+.mymain {
+  width: 50%;
+  height: 400px;
+  margin: 0 auto;
 }
 /* MyPageCheck 내용물 제목 위치, 가운데정렬 */
-.mymaintitle{
-    margin-bottom: '20px';
-    margin-top: '10%';
-    text-align: center;
+.mymaintitle {
+  margin-bottom: "20px";
+  margin-top: "10%";
+  text-align: center;
 }
 /* MyPageCheck 비밀번호 입력 레이블 너비 */
-.inputpwlabel{
-    display: inline-block;
-    width: 20%;
+.inputpwlabel {
+  display: inline-block;
+  width: 20%;
 }
 /* MyPageCheck 비밀번호 입력 부분 너비, 위치 */
-.inputpw{
-    display: inline-block;
-    width: 60%;
-    margin: 0 10px;
+.inputpw {
+  display: inline-block;
+  width: 60%;
+  margin: 0 10px;
 }
 /* MyPage 전체 틀 너비, 가운데정렬(글씨도) */
-#mywrap{
-    width: 700px;
-    margin: 0px auto;
-    text-align: center;
+#mywrap {
+  width: 700px;
+  margin: 0px auto;
+  text-align: center;
 }
 /* MyPage 항목 레이블 부분 가운데정렬 */
-.ant-descriptions-item-label{
-    text-align: center;
+.ant-descriptions-item-label {
+  text-align: center;
 }
 
 /* ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ WorkManage css ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ */
 /* WorkManage Layout의 Content부분 가운데정렬 */
-.managecontent{
-    margin: 0 auto;
-    width: 100%;
+.managecontent {
+  margin: 0 auto;
+  width: 100%;
 }
 /* WorkManageSend 왼쪽부분 위치, 너비조정 */
-#leftside{
-    float: left;
-    width: 25%;
+#leftside {
+  float: left;
+  width: 25%;
 }
 /* WorkManageSend 왼쪽부분 위치, 너비조정 */
-.deptbox{
-    display: inline-block;
+.deptbox {
+  display: inline-block;
 }
 /* WorkManageSend 부서레이블 배경, 글씨색 지정 */
-#deptbtn{
-    background-color: orange;
-    color: black;
+#deptbtn {
+  background-color: orange;
+  color: black;
 }
 /* WorkManageSend 부서선택박스 크기 지정 */
-.selectdept{
-    width: 246px;
+.selectdept {
+  width: 246px;
 }
 /* WorkManageSend 직원리스트 전체 위치 조정 */
-#emplist{
-    margin-top: 20px;
+#emplist {
+  margin-top: 20px;
 }
 /* WorkManageSend 직원리스트제목 글씨크기, 가운데정렬, 배경색 */
-#emplist_title{
-    font-size: 160%;
-    text-align: center;
-    background-color: orange;
+#emplist_title {
+  font-size: 160%;
+  text-align: center;
+  background-color: orange;
 }
 /* WorkManageSend 업무지시부분 (오른쪽 칸) 위치, 너비 지정*/
-#rightside{
-    float: left;
-    width: 64%;
-    margin-left: 12px;
+#rightside {
+  float: left;
+  width: 64%;
+  margin-left: 12px;
 }
 /* WorkManageSend 업무지시부분 전체 틀 높이 지정 */
-#rightwrap{
-    height: 50%;
-    margin-top: 51px;
+#rightwrap {
+  height: 50%;
+  margin-top: 51px;
 }
 /* WorkManageSend 업무지시 전체 레이블 너비, 글씨크기, 가운데정렬, 배경색 */
-.rightlabel{
-    display: inline-block;
-    width: 15%;
-    font-size: 160%;
-    text-align: center;
-    background-color: orange;
+.rightlabel {
+  display: inline-block;
+  width: 15%;
+  font-size: 160%;
+  text-align: center;
+  background-color: orange;
 }
 /* WorkManageSend 보낸날짜 출력부분 너비, 높이, 가운데정렬(가로, 세로), 배경색 */
-#rightstart{
-    display: inline-block;
-    width: 35%;
-    height: 35px;
-    text-align: center;
-    background-color: white;
-    vertical-align: top;
-    padding-top: 6px;
+#rightstart {
+  display: inline-block;
+  width: 35%;
+  height: 35px;
+  text-align: center;
+  background-color: white;
+  vertical-align: top;
+  padding-top: 6px;
 }
 /* WorkManageSend 종료날짜 출력부분 너비, 높이, 가운데정렬 */
-#rightend{
-    display: inline-block;
-    width: 35%;
-    height: 10px;
-    text-align-last: center;
+#rightend {
+  display: inline-block;
+  width: 35%;
+  height: 10px;
+  text-align-last: center;
 }
 /* WorkManageSend 종료날짜 선택 datepicker 너비 지정 */
-.enddate{
-    width: 100%;
+.enddate {
+  width: 100%;
 }
 /* WorkManageSend 업무지시 제목 입력부분 너비 */
-#righttitle{
-    display: inline-block;
-    width: 85%;
+#righttitle {
+  display: inline-block;
+  width: 85%;
 }
 /* WorkManageSend 업무지시 제목 input 크기 */
-.inputtitle{
-    font-size: 140%;
+.inputtitle {
+  font-size: 140%;
 }
 
 /* WorkManageInfo 전체 틀 너비, 테두리 서식 */
-#managewrap{
-    width: 470px;
-    border: solid 1px lightgray;
+#managewrap {
+  width: 470px;
+  border: solid 1px lightgray;
 }
 /* WorkManageInfo 왼쪽 레이블 너비, 높이, 가운데정렬, 테두리 선, 글씨크기 */
-.manageleft{
-    display: inline-block;
-    width: 25%;
-    height: 35px;
-    text-align: center;
-    border-right: solid 1px lightgray;
-    border-bottom: solid 1px lightgray;
-    font-size: 18px;
+.manageleft {
+  display: inline-block;
+  width: 25%;
+  height: 35px;
+  text-align: center;
+  border-right: solid 1px lightgray;
+  border-bottom: solid 1px lightgray;
+  font-size: 18px;
 }
 /* WorkManageInfo 오른쪽 내용 너비, 높이, 가운데정렬, 테두리 선, 글씨크기 */
-.manageright{
-    display: inline-block;
-    width: 75%;
-    height: 35px;
-    text-align: center;
-    border-bottom: solid 1px lightgray;
-    font-size: 18px;
+.manageright {
+  display: inline-block;
+  width: 75%;
+  height: 35px;
+  text-align: center;
+  border-bottom: solid 1px lightgray;
+  font-size: 18px;
 }
 /* WorkManageInfo 내용 레이블 높이, 가운데정렬, 테두리 선, 글씨크기 */
-#managecontent{
-    height: 35px;
-    text-align: center;
-    border-bottom: solid 1px lightgray;
-    font-Size: 18px;
+#managecontent {
+  height: 35px;
+  text-align: center;
+  border-bottom: solid 1px lightgray;
+  font-size: 18px;
 }
 /* WorkManageInfo 내용 출력부 높이, 글씨크기 */
-#managecontentprint{
-    height: 150px;
-    font-size: 18px;
+#managecontentprint {
+  height: 150px;
+  font-size: 18px;
 }
 /* ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ Sider.css ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ */
