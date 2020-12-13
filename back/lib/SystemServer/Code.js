@@ -26,14 +26,14 @@ router.get("/mastercoderead", (req, res) => {
     if (error) throw error;
     let temp = [];
     let data = {};
-    let i = 0;
+    let key = 0;
     rows.forEach((row) => {
       data = {
-        key: String(i + 1),
+        key: String(key + 1),
         LargeCode: row.LargeCode,
         LargeInfo: row.LargeInfo,
       };
-      i++;
+      key++;
       temp.push(data);
     });
     res.send(temp);

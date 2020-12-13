@@ -56,7 +56,7 @@ router.get("/read", (req, res) => {
     if (error) throw error;
     let temp = [];
     let data = {};
-    let i = 0;
+    let key = 0;
     users.forEach((user) => {
       //console.log(user);
       // db.query(`SELECT * from SmallCode where SmallCode=?`,[user.dept],(error,userDept)=>{
@@ -67,7 +67,7 @@ router.get("/read", (req, res) => {
       // });
       // console.log('out : ',dept);
       data = {
-        key: String(i + 1),
+        key: String(key + 1),
         id: user.id,
         dept: user.dept,
         rank: user.rank,
@@ -79,7 +79,7 @@ router.get("/read", (req, res) => {
         address: user.address,
         des: user.des,
       };
-      i++;
+      key++;
       temp.push(data);
     });
     res.send(temp);
