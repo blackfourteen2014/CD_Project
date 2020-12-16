@@ -1,5 +1,5 @@
 const express = require("express"); //express 모듈을 가져옴
-const db = require("./config/db"); //자신의 데이터베이스 정보(유저명과 패스워드 등)를 입력
+// const db = require("./config/db"); //자신의 데이터베이스 정보(유저명과 패스워드 등)를 입력
 const app = express(); //funtion을 이용하여 새로운 express app을 만듬
 const port = 5000; //port number
 const bodyParser = require("body-parser");
@@ -53,19 +53,6 @@ app.use("/api/users", EmployeeManageRouter);
 app.use("/api/system", UserRouter);
 app.use("/api/system", CodeRouter);
 app.use("/api/system", HolidayRouter);
-
-//비밀번호 예시============================================================================================
-// const crypto = require('crypto');
-// const password = '123q';
-// const pass = crypto.createHash('sha512').update(password).digest('base64');
-// const pass2 = crypto.createHash('sha512').update(password).digest('base64');
-
-// if(pass === pass2){
-//   console.log('같다');
-// }else{
-//   console.log('다르다');
-// }
-//========================================================================================================
 
 //port number를 콘솔에 출력
 app.listen(port, () => {

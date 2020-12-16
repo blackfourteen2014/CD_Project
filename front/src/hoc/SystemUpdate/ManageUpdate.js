@@ -11,7 +11,7 @@ const { Option } = Select;
 
 function ManageUpdate(props) {
   const dispatch = useDispatch(); //redux
-  const Id = useState(props.UserData.id);
+  const [Id, setId] = useState(props.UserData.id);
   const [Name, setName] = useState(props.UserData.name);
   const [Password, setPassword] = useState("");
   const [Email, setEmail] = useState(props.UserData.email);
@@ -95,7 +95,7 @@ function ManageUpdate(props) {
     dispatch(RankCodeListRead()).then((response) => {
       setRankList(response.payload);
     });
-  });
+  }, []);
   return (
     <>
       <Modal

@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
+const crypto = require("crypto"); // 비밀번호 암호화
 
 //로그아웃
 router.get("/logout", (req, res) => {
@@ -23,6 +24,10 @@ router.post("/login", (req, res) => {
       grant: "system",
     });
   } else {
+    const password = crypto
+      .createHash("sha512")
+      .update(req.body.password)
+      .digest("base64");
     db.query(
       `select * from employee where id='${req.body.Id}'`,
       (err, userInfo) => {
@@ -37,7 +42,7 @@ router.post("/login", (req, res) => {
           //console.log(userInfo[0].rank);
           if (
             req.body.Id === userInfo[0].id &&
-            req.body.password === userInfo[0].password &&
+            password === userInfo[0].password &&
             userInfo[0].rank === "대표"
           ) {
             req.session.userId = userInfo[0].id;
@@ -50,7 +55,7 @@ router.post("/login", (req, res) => {
             });
           } else if (
             req.body.Id === userInfo[0].id &&
-            req.body.password === userInfo[0].password
+            password === userInfo[0].password
           ) {
             req.session.userId = userInfo[0].id;
             //req.session.userName = userInfo[0].name;

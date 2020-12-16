@@ -1,15 +1,33 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../config/db");
+const crypto = require("crypto"); // 비밀번호 암호화
+//비밀번호 예시============================================================================================
+// const crypto = require('crypto');
+// const password = '123q';
+// const pass = crypto.createHash('sha512').update(password).digest('base64');
+// const pass2 = crypto.createHash('sha512').update(password).digest('base64');
+
+// if(pass === pass2){
+//   console.log('같다');
+// }else{
+//   console.log('다르다');
+// }
+//========================================================================================================
 //직원 관리 데이터 추가
 router.post("/create", (req, res) => {
   //console.log(req.body);
+  const password = crypto
+    .createHash("sha512")
+    .update(req.body.password)
+    .digest("base64");
+  //console.log(password.length);
   db.query(
     `INSERT INTO employee(id, name, password, email, phone, zim, address, des, dept, rank) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       req.body.id,
       req.body.name,
-      req.body.password,
+      password,
       req.body.email,
       req.body.phone,
       req.body.zim,
@@ -88,12 +106,16 @@ router.get("/read", (req, res) => {
 //수정
 router.post("/update", (req, res) => {
   //console.log(req.body.name);
+  const password = crypto
+    .createHash("sha512")
+    .update(req.body.password)
+    .digest("base64");
   const userData = req.body;
   db.query(
     "update employee SET name =?, password=?, email=?, phone=?, zim=?, address=?, des=?, dept=?, rank=? where id=?",
     [
       userData.name,
-      userData.password,
+      password,
       userData.email,
       userData.phone,
       userData.zim,
@@ -118,13 +140,13 @@ router.get("/deptlist", (req, res) => {
     "SELECT * from MasterCode where LargeInfo like ?",
     ["%부서%"],
     (error, data) => {
-      if (error) res.send([""]);
+      if (error) throw error;
       //console.log(data[0].LargeCode);
       db.query(
         "SELECT * from SmallCode where SmallCode like ?",
         [`%${data[0].LargeCode}%`],
         (error2, depts) => {
-          if (error2) res.send([""]);
+          if (error2) throw error2;
           //console.log(depts);
           res.send(depts);
         }

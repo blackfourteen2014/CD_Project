@@ -23,7 +23,7 @@ const localizer = momentLocalizer(moment);
 function HolidayUser(props) {
   const dispatch = useDispatch();
   const [HolidayUserData, setHolidayUserData] = useState([""]); //연가 정보
-  const [ListData, setListData] = useState([""]); //휴일 정보
+  const [ListData, setListData] = useState([{}]); //휴일 정보
 
   useEffect(() => {
     //휴일 데이터 Read
@@ -34,7 +34,7 @@ function HolidayUser(props) {
     dispatch(HolidayUserDataRead()).then((response) => {
       setHolidayUserData(response.payload);
     });
-  });
+  }, []);
   //캘린더====================================================================================
   const [Visible, setVisible] = useState(false);
   //팝업 ON
