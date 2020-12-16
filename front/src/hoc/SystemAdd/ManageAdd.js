@@ -94,7 +94,7 @@ function ManageAdd(props) {
     dispatch(RankCodeListRead()).then((response) => {
       setRankList(response.payload);
     });
-  });
+  }, []);
 
   return (
     <>

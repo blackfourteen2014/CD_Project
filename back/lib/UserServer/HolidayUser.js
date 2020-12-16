@@ -10,9 +10,11 @@ router.get("/holidayuserdataread", (req, res) => {
       if (error) throw error;
       let temp = [];
       let data = {};
+      let key = 0;
       lists.forEach((list) => {
         //console.log(list);
         data = {
+          key: String(key + 1),
           id: list.id,
           startDate: list.StartDate,
           endDate: list.EndDate,
@@ -20,6 +22,7 @@ router.get("/holidayuserdataread", (req, res) => {
           content: list.Des,
           confirmYN: list.confirmYN,
         };
+        key++;
         temp.push(data);
       });
       res.send(temp);

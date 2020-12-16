@@ -10,13 +10,16 @@ router.get("/holidaydataread", (req, res) => {
       //console.log('holiday date\n', lists);
       let temp = [];
       let data = {};
+      let key = 0;
       lists.forEach((list) => {
         data = {
+          key: String(key + 1),
           title: list.SmallInfo,
           start: list.StartDate,
           end: list.StartDate,
           allDay: false,
         };
+        key++;
         temp.push(data);
       });
       res.send(temp);

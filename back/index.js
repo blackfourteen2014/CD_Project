@@ -1,5 +1,5 @@
 const express = require("express"); //express 모듈을 가져옴
-const db = require("./config/db"); //자신의 데이터베이스 정보(유저명과 패스워드 등)를 입력
+// const db = require("./config/db"); //자신의 데이터베이스 정보(유저명과 패스워드 등)를 입력
 const app = express(); //funtion을 이용하여 새로운 express app을 만듬
 const port = 5000; //port number
 const bodyParser = require("body-parser");

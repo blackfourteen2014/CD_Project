@@ -9,7 +9,7 @@
 create table employee(
 	id varchar(50),
 	name varchar(50),
-	password varchar(50),
+	password varchar(250),
 	email varchar(50),
 	phone varchar(50),
 	zim varchar(50),
@@ -79,7 +79,7 @@ set sql_safe_updates=0;
 
 # 테이블 수정=====================================================================
 #스몰 코드 테이블
-	alter table smallcode add SmallContent varchar(100);
+    alter table employee modify password varchar(250);
 #==============================================================================
 
 # 데이터 넣기(임시 데이터)===================================================================================================
@@ -198,7 +198,6 @@ set sql_safe_updates=0;
 # 안먹는 코드
 	SELECT holi.DATE,small.SmallInfo FROM holiday AS holi JOIN SmallCode AS small ON small.SmallCode = holi.holimanage;
 #======================================================================================
-
 # 근무조회 데이터
 	# 2020
 	INSERT INTO employeeWork (DATE,OnWork,OffWork,id) VALUES('2020/10/25','10:00','18:00','1111');
