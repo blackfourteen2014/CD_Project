@@ -14,7 +14,6 @@ function HolidayUserAdd(props) {
   const [EndDate, setEndDate] = useState(""); //종료 날짜
   //선택한 날짜 값
   const handleDate = (value) => {
-    //console.log(value[0].format('YYYY/MM/DD'));
     setStartDate(value[0].format("YYYY/MM/DD"));
     setEndDate(value[1].format("YYYY/MM/DD"));
   };
