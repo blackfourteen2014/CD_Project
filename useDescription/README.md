@@ -2,12 +2,15 @@
 
 # 개발 도구
 
-- CodeEditer : VS Code
+**- 인터넷 검색 후 설치할 것은 옆에 (ㅇ)로 표시**
+**(나머지 패키지들은 npm install로 자동으로 설치됨)**
+
+- CodeEditer : VS Code (ㅇ)
 - Front-End : React
 - UI-Design : Ant Design
-- Back-End : Nodejs
+- Back-End : Nodejs (ㅇ)
 - Nodejs-FrameWork : Express
-- DataBase : MySQL(server5.7)
+- DataBase : MySQL(server5.7) (ㅇ)
 - 소스 관리 및 공유 : Git, GitHub
 
 # 사용 설명
@@ -33,6 +36,12 @@ back/config 에 있는 db_tamplate.js와 sessionDB.template.js
 exampleDB.sql에 있는 테이블들을 만들어줍니다.
 (스키마가 UTF-8인 상태에서 만들어야 합니다. 참조 : https://lazymankook.tistory.com/70)
 ```
+
+- mysql server 5.7 확인 (myworkbench-edit-preferences-Modeling-MySQL)
+  ![server check](./images/mysql_server_check.PNG)
+
+- mysql utf-8 확인(myworkbench-MySQL Connections 로그인-자신의 DB-오른쪽클릭-alter Schema-Charset/Collation)
+  ![utf8 check](./images/mysql_utf8_check.PNG)
 
 ### 실행(CD_Project에서 시작)
 
